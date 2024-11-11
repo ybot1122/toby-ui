@@ -1,5 +1,3 @@
 export const FAQItems = () => {
-  return (
-    <div>FAQ Items</div>
-  )
-}
+  return <div>FAQ Items</div>;
+};
