@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "lint": "echo \"hu\"",
+    "lint": "npx eslint . --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install",
     "format": "prettier --write ."
@@ -33,6 +33,10 @@
     "react": "^18.3.1",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
-    "husky": "^8.0.0"
+    "husky": "^8.0.0",
+    "eslint": "^9.13.0",
+    "typescript-eslint": "^8.10.0",
+    "@types/eslint__js": "^8.42.3"
+
   }
 }
