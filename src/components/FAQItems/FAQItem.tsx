@@ -1,3 +1,5 @@
+import './styles.css'
+
 export const FAQItem = () => {
-  return <div>FAQ Items</div>;
+  return <div className='text-2xl'>FAQ Items</div>;
 };
