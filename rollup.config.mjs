@@ -4,7 +4,7 @@ import typescript from "@rollup/plugin-typescript";
  * @type {import('rollup').RollupOptions}
  */
 const config = {
-  input: "src/index.ts",
+  input: ["src/components/FAQItems/FAQItems.tsx", "src/components/HelloWorld/HelloWorld.tsx"],
   output: {
     format: "esm",
     sourcemap: true,
@@ -12,7 +12,7 @@ const config = {
   },
   plugins: [
     typescript({
-      exclude: ["**/test/**"],
+      exclude: ["**/*.test.*"],
     })
   ],
   external: ["react"],
