@@ -1,4 +1,4 @@
-export * from './components/FAQItem/FAQItem'
+export { FAQItem, FAQItemList } from "./components/FAQItem/FAQItem";
 
 export namespace TobyUI {
   export type FAQItem = ({question, answer}: {question: string, answer: string[]}) => JSX.Element;
