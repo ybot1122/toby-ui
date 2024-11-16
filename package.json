@@ -5,7 +5,7 @@
   "exports": {
     "./FAQItem": "./dist/FAQItem.js"
   },
-  "types": "./dist/components/FAQItem/FAQItem.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
+import TobyUI from "../..";
 
-export const FAQItem = ({
+export const FAQItem: TobyUI.FAQItem = ({
   question,
   answer,
-}: {
-  question: string;
-  answer: string[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
