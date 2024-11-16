@@ -18,5 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Story: Story = {
   args: {
+    question: "How much will this service cost?",
+    answer: ["We have multiple price points.", "Come speak to one of our representatives for more info."]
   },
 };
