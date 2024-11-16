@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Collection of reusable React components.",
   "exports": {
-    "./FAQItem": "./dist/FAQItem.js"
+    ".": "./dist/index",
+    "./FAQItem": "./dist/components/FAQItem/FAQItem.js"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index",
   "files": [
     "dist"
   ],
