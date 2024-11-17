@@ -1,17 +1,11 @@
 import React, { useCallback, useState, useEffect } from "react";
 import * as TobyUITypes from "../..";
-import { generateUUID } from "../../utils/generateUUID";
 
 export const FAQItem: TobyUITypes.FAQItem = ({
   question,
-  answer: answerProp,
+  children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [answer, setAnswer] = useState<{text: string, id: string}[]>([]);
-
-  useEffect(() => {
-    setAnswer(answerProp.map((a) => ({text: a, id: generateUUID()})))
-  }, [answerProp, setAnswer])
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -23,7 +17,6 @@ export const FAQItem: TobyUITypes.FAQItem = ({
     <li
       className={`grid justify-items-stretch py-10 px-5 w-full border-t border-zinc-500 last:border-b`}
     >
-
       {/* QUESTION */}
       <div className={`flex items-center ${questionMb}`}>
         <button
@@ -41,14 +34,8 @@ export const FAQItem: TobyUITypes.FAQItem = ({
         </button>        
       </div>
 
-
       {/* ANSWER */}
-      {isOpen &&
-        answer.map(({text, id}) => (
-          <p className="md:mx-10 text-lg mb-5" key={id}>
-            {text}
-          </p>
-        ))}
+      {isOpen ? <div>{children}</div> : <></>}
     </li>
   );
 }

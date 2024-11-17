@@ -61,7 +61,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Story: Story = {
   args: {
-    children: faqs.map((f) => <FAQItem question={f.q} answer={f.a} key={f.q} />)
+    children: [
+      ...faqs.map((f) => <FAQItem question={f.q} key={f.q}>{f.a.map((ans) => <p key={ans} className='first:mt-0 mt-5'>{ans}</p>)}</FAQItem>),
+      <FAQItem question="Do you have pictures?">
+        <img src="https://www.itsprobablyspicy.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdryy6uo6k%2Fimage%2Fupload%2Fv1709668872%2Fits-probably-spicy%2Fstewtable2.jpg&w=1080&q=75" />
+      </FAQItem>
+    ]
   },
 };
 
