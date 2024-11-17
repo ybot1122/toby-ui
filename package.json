@@ -1,5 +1,5 @@
 {
-  "name": "toby-ui",
+  "name": "@ybot1122/toby-ui",
   "version": "0.0.1",
   "description": "Collection of reusable React components.",
   "exports": {
