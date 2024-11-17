@@ -37,7 +37,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
           className={`ml-5 w-[20px]`}
           aria-hidden="true"
         >
-          X
+          <PlusMinusIcon isOpen={isOpen} />
         </button>        
       </div>
 
@@ -58,5 +58,18 @@ export const FAQItemList: TobyUITypes.FAQItemList = ({children}) => {
     <ul className="">
       {children}
     </ul>
+  )
+}
+
+const PlusMinusIcon = ({isOpen}: {isOpen: boolean}) => {
+
+  const rotate = isOpen ? 'rotate-90' : '';
+
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 160 160">
+  <rect  x="70" width="20" height="160" className={`transition-transform duration-300 origin-center ${rotate}`} />
+  <rect y="70" width="160" height="20"  />
+</svg>
+
   )
 }
