@@ -4,6 +4,9 @@ import * as TobyUITypes from "../..";
 export const FAQItem: TobyUITypes.FAQItem = ({
   question,
   children,
+  questionFontColor,
+  borderColor,
+  fillColor,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,12 +18,12 @@ export const FAQItem: TobyUITypes.FAQItem = ({
 
   return (
     <li
-      className={`grid justify-items-stretch py-10 px-5 w-full border-t border-zinc-500 last:border-b`}
+      className={`grid justify-items-stretch py-10 px-5 w-full border-t ${borderColor} last:border-b`}
     >
       {/* QUESTION */}
       <div className={`flex items-center ${questionMb}`}>
         <button
-          className={`text-left text-2xl cursor mr-5 grow`}
+          className={`text-left text-2xl cursor mr-5 grow ${questionFontColor}`}
           onClick={toggleOpen}
         >
           {question}
@@ -30,7 +33,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
           className={`ml-5 w-[20px]`}
           aria-hidden="true"
         >
-          <PlusMinusIcon isOpen={isOpen} />
+          <PlusMinusIcon isOpen={isOpen} fillColor={fillColor} />
         </button>        
       </div>
 
@@ -48,12 +51,12 @@ export const FAQItemList: TobyUITypes.FAQItemList = ({children}) => {
   )
 }
 
-const PlusMinusIcon = ({isOpen}: {isOpen: boolean}) => {
+const PlusMinusIcon = ({isOpen, fillColor}: {isOpen: boolean, fillColor: string}) => {
 
   const rotate = isOpen ? 'rotate-90' : '';
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 160 160">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 160 160" className={fillColor}>
   <rect  x="70" width="20" height="160" className={`transition-transform duration-300 origin-center ${rotate}`} />
   <rect y="70" width="160" height="20"  />
 </svg>
