@@ -21,11 +21,11 @@ export const FAQItem: TobyUITypes.FAQItem = ({
 
   return (
     <li
-      className={`grid py-10 px-5 w-full border-t border-zinc-500 last:border-b`}
+      className={`grid justify-items-stretch py-10 px-5 w-full border-t border-zinc-500 last:border-b`}
     >
 
       {/* QUESTION */}
-      <div className={`flex w-full items-center ${questionMb}`}>
+      <div className={`flex items-center ${questionMb}`}>
         <button
           className={`text-left text-2xl cursor mr-5 grow`}
           onClick={toggleOpen}
@@ -45,8 +45,8 @@ export const FAQItem: TobyUITypes.FAQItem = ({
       {/* ANSWER */}
       {isOpen &&
         answer.map(({text, id}) => (
-          <p className="md:mx-10 w-full text-lg mb-5" key={id}>
-            {text} + {id}
+          <p className="md:mx-10 text-lg mb-5" key={id}>
+            {text}
           </p>
         ))}
     </li>
