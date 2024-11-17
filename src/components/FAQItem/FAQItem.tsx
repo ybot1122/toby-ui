@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TobyUI } from "../..";
+import * as TobyUITypes from "../..";
 
-export const FAQItem: TobyUI.FAQItem = ({
+export const FAQItem: TobyUITypes.FAQItem = ({
   question,
   answer,
 }) => {
@@ -42,7 +42,7 @@ export const FAQItem: TobyUI.FAQItem = ({
   );
 }
 
-export const FAQItemList: TobyUI.FAQItemList = ({children}) => {
+export const FAQItemList: TobyUITypes.FAQItemList = ({children}) => {
   return (
     <ul className="*:border-t *:border-borderGray">
       {children}
