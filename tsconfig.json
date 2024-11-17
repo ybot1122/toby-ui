@@ -10,7 +10,8 @@
     "moduleDetection": "force",
     "isolatedModules": true,
     "declaration": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "noImplicitAny": true,
   },
   "include": ["src", "test"],
   "exclude": ["node_modules", "dist", "package.json", "package-lock.json"],
