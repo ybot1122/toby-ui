@@ -19,3 +19,10 @@ module.exports = {
   ],
 }
 ```
+
+### Publish and Release
+
+1. Make a PR and merge to bump the version in package.json
+2. In GitHub, create release.
+3. `npm login`
+4. `npm publish`
