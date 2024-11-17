@@ -9,28 +9,24 @@ export const FAQItem: TobyUITypes.FAQItem = ({
 
   return (
     <li
-      className={`flex py-10 text-left w-full flex-wrap`}
+      className={`grid py-10 px-5 w-full`}
     >
-      <button
-        className={`block text-blue text-2xl cursor w-1/2 text-left ${isOpen ? "mb-10" : ""} grow mr-5`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {question}
-      </button>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`${isOpen ? "mb-10" : ""} ml-5 relative w-[20px]`}
-        aria-hidden="true"
-      >
-        <div
-          className="right-[20px] absolute inline-block w-[20px] h-[2px] bg-blue"
+      <div className="flex w-full items-center">
+        <button
+          className={`text-left text-2xl cursor mr-5 grow ${isOpen ? "mb-10" : ""}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {question}
+        </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`ml-5 w-[20px] ${isOpen ? "mb-10" : ""}`}
           aria-hidden="true"
-        ></div>
-        <div
-          className={`right-[20px] inline-block w-[20px] h-[2px] bg-blue absolute ${isOpen ? "animate-closePlus" : "rotate-90 animate-openPlus"}`}
-          aria-hidden="true"
-        ></div>
-      </button>
+        >
+          X
+        </button>        
+      </div>
+
 
       {isOpen &&
         answer.map((ans) => (
@@ -44,7 +40,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
 
 export const FAQItemList: TobyUITypes.FAQItemList = ({children}) => {
   return (
-    <ul className="*:border-t *:border-borderGray">
+    <ul className="*:border-t *:border-zinc-500 *:last:border-b">
       {children}
     </ul>
   )
