@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import * as TobyUITypes from "../..";
 
 export const FAQItem: TobyUITypes.FAQItem = ({
@@ -7,6 +7,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
   questionFontColor,
   borderColor,
   fillColor,
+  bold = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,6 +16,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
   }, [setIsOpen])
 
   const questionMb = isOpen ? 'mb-10' : '';
+  const fontBold = bold ? 'font-bold' : '';
 
   return (
     <li
@@ -23,7 +25,7 @@ export const FAQItem: TobyUITypes.FAQItem = ({
       {/* QUESTION */}
       <div className={`flex items-center ${questionMb}`}>
         <button
-          className={`text-left text-2xl cursor mr-5 grow ${questionFontColor}`}
+          className={`text-left text-2xl cursor mr-5 grow ${questionFontColor} ${fontBold}`}
           onClick={toggleOpen}
         >
           {question}

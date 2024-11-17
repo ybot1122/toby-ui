@@ -62,7 +62,7 @@ type Story = StoryObj<typeof meta>;
 export const Story: Story = {
   args: {
     children: [
-      ...faqs.map((f) => <FAQItem question={f.q} key={f.q}       questionFontColor= 'text-blue-500'
+      ...faqs.map((f) => <FAQItem question={f.q} key={f.q}  bold={true}     questionFontColor= 'text-blue-500'
       fillColor='fill-yellow-700'
       borderColor='border-green-300'
 >{f.a.map((ans) => <p key={ans} className='first:mt-0 mt-5'>{ans}</p>)
