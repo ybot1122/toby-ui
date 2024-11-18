@@ -19,13 +19,7 @@ export const NavBar: TobyUITypes.NavBar = () => {
         </div>
 
         <div className="md:hidden justify-self-end flex mr-5">
-          <button
-            className=" rounded-full hover:bg-silver p-2 self-center"
-            onClick={(e) => {
-            }}
-          >
             <MenuIcon />
-          </button>
         </div>
 
         <div className="flex col-start-2 justify-end">
