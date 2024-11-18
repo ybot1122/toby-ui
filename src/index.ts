@@ -13,3 +13,4 @@ bold?: boolean
 }
 ) => JSX.Element;
 export type FAQItemList = ({children}: {children: JSX.Element | JSX.Element[]}) => JSX.Element;
+export type NavBar = () => JSX.Element;
