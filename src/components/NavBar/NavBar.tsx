@@ -6,11 +6,11 @@ export const NavBar: TobyUITypes.NavBar = () => {
   return (
     <nav>
 
-<div className="flex py-4 mx-auto max-w-screen-lg h-full text-blue">
-        <div className="self-center ml-5 flex-grow">
+<div className="flex py-4 mx-auto max-w-screen-lg">
+        <div className="">
           <a
             href="/"
-            className="text-center inline-block text-2xl md:text-4xl"
+            className=""
           >
             Keenesse
             <br />
@@ -18,13 +18,13 @@ export const NavBar: TobyUITypes.NavBar = () => {
           </a>
         </div>
 
-        <div className="md:hidden justify-self-end flex mr-5">
-            <MenuIcon />
+        <div className="ml-10">
+            <HamburgerIcon />
         </div>
 
-        <div className="flex col-start-2 justify-end">
+        <div className="ml-10">
           <ul
-            className={`mt-[60px] md:mt-[0px] absolute md:mr-5 md:static max-md:animate-slideIn md:flex w-1/2 md:w-auto z-40 bg-white items-center justify-between md:space-x-4`}
+            className={``}
           >
             <li>Item2</li>
             <li>Item3</li>
@@ -38,17 +38,12 @@ export const NavBar: TobyUITypes.NavBar = () => {
   )
 }
 
-const MenuIcon = () => {
+const HamburgerIcon = () => {
   return (
-    <svg viewBox="0 0 100 50">
-
-  <path id="line1" d="M 10, 25 L 90, 25" stroke="black" strokeWidth="5" />
-
-  <path id="line2" d="M 10, 25 L 90, 25" stroke="black" strokeWidth="5" />
-
-  <path id="line3" d="M 10, 25 L 90, 25" stroke="black" strokeWidth="5" />
-
+<svg id="burger" width="30" height={30} className="openmenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+  <path className="top" d="M0 5h30v2H0z"/>
+  <line className="mid" x1="0" y1="15" x2="30" y2="15" stroke="black" strokeWidth="2" />
+  <path className="bot" d="M0 23h30v2H0z"/>
 </svg>
-
   )
 }
