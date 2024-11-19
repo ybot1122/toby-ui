@@ -38,6 +38,10 @@ export const NavBar: TobyUITypes.NavBar = () => {
 };
 
 const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
+  const top = isOpen ? "rotate-45 translate-x-[8.5px]" : "";
+  const mid = isOpen ? "scale-[0.1]" : "";
+  const bot = isOpen ? "rotate-[-45deg] translate-x-[8.5px]" : "";
+
   return (
     <svg
       id="burger"
@@ -47,9 +51,12 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 30 30"
     >
-      <path className="top" d="M0 5h30v2H0z" />
+      <path
+        className={`transition-transform duration-300 origin-top-left ${top}`}
+        d="M0 5h30v2H0z"
+      />
       <line
-        className="mid"
+        className={`transition-transform duration-300 origin-center ${mid}`}
         x1="0"
         y1="15"
         x2="30"
@@ -57,7 +64,10 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
         stroke="black"
         strokeWidth="2"
       />
-      <path className="bot" d="M0 23h30v2H0z" />
+      <path
+        className={`transition-transform duration-300 origin-bottom-left ${bot}`}
+        d="M0 23h30v2H0z"
+      />
     </svg>
   );
 };
