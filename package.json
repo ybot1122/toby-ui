@@ -6,10 +6,17 @@
     "./FAQItem": {
       "types": "./dist/components/FAQItem/FAQItem.d.ts",
       "default": "./dist/components/FAQItem/FAQItem.js"
+    },
+    "./NavBar": {
+      "types": "./dist/components/NavBar/NavBar.d.ts",
+      "default": "./dist/components/NavBar/NavBar.js"
     }
   },
   "files": [
-    "dist", "package.json", "README.md", "LICENSE"
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
