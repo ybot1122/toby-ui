@@ -8,28 +8,28 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     {
-      name: '@storybook/addon-styling-webpack',
+      name: "@storybook/addon-styling-webpack",
       options: {
         rules: [
           // Replaces existing CSS rules to support PostCSS
           {
             test: /\.css$/,
             use: [
-              'style-loader',
+              "style-loader",
               {
-                loader: 'css-loader',
-                options: { importLoaders: 1 }
+                loader: "css-loader",
+                options: { importLoaders: 1 },
               },
               {
                 // Gets options from `postcss.config.js` in your project root
-                loader: 'postcss-loader',
-                options: { implementation: require.resolve('postcss') }
-              }
+                loader: "postcss-loader",
+                options: { implementation: require.resolve("postcss") },
+              },
             ],
-          }
-        ]
-      }
-    }
+          },
+        ],
+      },
+    },
   ],
   framework: {
     name: "@storybook/react-webpack5",
@@ -39,7 +39,7 @@ const config: StorybookConfig = {
     jsc: {
       transform: {
         react: {
-          runtime: 'automatic',
+          runtime: "automatic",
         },
       },
     },

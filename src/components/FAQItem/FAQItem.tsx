@@ -13,10 +13,10 @@ export const FAQItem: TobyUITypes.FAQItem = ({
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
-  }, [setIsOpen])
+  }, [setIsOpen]);
 
-  const questionMb = isOpen ? 'mb-10' : '';
-  const fontBold = bold ? 'font-bold' : '';
+  const questionMb = isOpen ? "mb-10" : "";
+  const fontBold = bold ? "font-bold" : "";
 
   return (
     <li
@@ -36,32 +36,43 @@ export const FAQItem: TobyUITypes.FAQItem = ({
           aria-hidden="true"
         >
           <PlusMinusIcon isOpen={isOpen} fillColor={fillColor} />
-        </button>        
+        </button>
       </div>
 
       {/* ANSWER */}
       {isOpen ? <div>{children}</div> : <></>}
     </li>
   );
-}
+};
 
-export const FAQItemList: TobyUITypes.FAQItemList = ({children}) => {
+export const FAQItemList: TobyUITypes.FAQItemList = ({ children }) => {
+  return <ul className="">{children}</ul>;
+};
+
+const PlusMinusIcon = ({
+  isOpen,
+  fillColor,
+}: {
+  isOpen: boolean;
+  fillColor: string;
+}) => {
+  const rotate = isOpen ? "rotate-90" : "";
+
   return (
-    <ul className="">
-      {children}
-    </ul>
-  )
-}
-
-const PlusMinusIcon = ({isOpen, fillColor}: {isOpen: boolean, fillColor: string}) => {
-
-  const rotate = isOpen ? 'rotate-90' : '';
-
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 160 160" className={fillColor}>
-  <rect  x="70" width="20" height="160" className={`transition-transform duration-300 origin-center ${rotate}`} />
-  <rect y="70" width="160" height="20"  />
-</svg>
-
-  )
-}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 160 160"
+      className={fillColor}
+    >
+      <rect
+        x="70"
+        width="20"
+        height="160"
+        className={`transition-transform duration-300 origin-center ${rotate}`}
+      />
+      <rect y="70" width="160" height="20" />
+    </svg>
+  );
+};

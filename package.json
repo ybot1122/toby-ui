@@ -13,7 +13,10 @@
     }
   },
   "files": [
-    "dist", "package.json", "README.md", "LICENSE"
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
