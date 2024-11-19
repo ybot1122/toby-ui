@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
 export const NavBar: TobyUITypes.NavBar = () => {
@@ -38,9 +38,37 @@ export const NavBar: TobyUITypes.NavBar = () => {
 };
 
 const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
-  const top = isOpen ? "rotate-45 translate-x-[8.5px]" : "";
-  const mid = isOpen ? "scale-[0.1]" : "";
-  const bot = isOpen ? "rotate-[-45deg] translate-x-[8.5px]" : "";
+  const currTimer = useRef<number>();
+  const [animSeq, setAnimSeq] = useState<0 | 1 | 2>(0);
+  const top =
+    animSeq === 0
+      ? ""
+      : animSeq === 1
+        ? "translate-y-[-5px]"
+        : "rotate-45 translate-x-[8.5px]";
+  const mid =
+    animSeq === 0 ? "" : animSeq === 1 ? "scale-[0.1]" : "scale-[0.1]";
+  const bot =
+    animSeq === 0
+      ? ""
+      : animSeq === 1
+        ? "translate-y-[5px]"
+        : "rotate-[-45deg] translate-x-[8.5px]";
+
+  useEffect(() => {
+    clearInterval(currTimer.current);
+    if (!isOpen) {
+      setAnimSeq(1);
+      currTimer.current = window.setTimeout(() => {
+        setAnimSeq(0);
+      }, 300);
+    } else {
+      setAnimSeq(1);
+      currTimer.current = window.setTimeout(() => {
+        setAnimSeq(2);
+      }, 300);
+    }
+  }, [isOpen]);
 
   return (
     <svg
