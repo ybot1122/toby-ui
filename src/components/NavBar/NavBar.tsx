@@ -9,31 +9,41 @@ export const NavBar: TobyUITypes.NavBar = () => {
   }, [setIsOpen]);
 
   return (
-    <nav>
-      <div className="flex py-4 mx-auto max-w-screen-lg">
-        <div className="">
-          <a href="/" className="">
-            Keenesse
-            <br />
-            Coaching &amp; Consulting
-          </a>
-        </div>
+    <nav className="flex p-4 mx-auto max-w-screen-lg items-center">
+      <div className="">
+        <a href="/" className="">
+          Keenesse
+          <br />
+          Coaching &amp; Consulting
+        </a>
+      </div>
 
-        <div className="ml-10">
-          <ul className={``}>
-            <li>Item2</li>
-            <li>Item3</li>
-            <li>Item4</li>
-          </ul>
-        </div>
+      <ul className={`ml-10 flex-grow flex`}>
+        <NavItem text="Item One" href="#" />
+        <NavItem text="Item TwoTwo" href="#" />
+        <NavItem text="Item" href="#" />
+      </ul>
 
-        <div className="ml-10">
-          <button onClick={toggleMenu}>
-            <HamburgerIcon isOpen={isOpen} />
-          </button>
-        </div>
+      <div className="ml-10">
+        <button onClick={toggleMenu}>
+          <HamburgerIcon isOpen={isOpen} />
+        </button>
       </div>
     </nav>
+  );
+};
+
+const NavItem = ({ text, href }: { text: string; href: string }) => {
+  return (
+    <li className={`group relative md:text-center uppercase text-md flex-grow`}>
+      <a href={href} className="block p-5">
+        {text}
+      </a>
+      <span
+        className="opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-blue-300 b-0"
+        aria-hidden="true"
+      ></span>
+    </li>
   );
 };
 
