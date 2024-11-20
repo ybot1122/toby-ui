@@ -20,17 +20,17 @@ export const NavBar: TobyUITypes.NavBar = () => {
         </div>
 
         <div className="ml-10">
-          <button onClick={toggleMenu}>
-            <HamburgerIcon isOpen={isOpen} />
-          </button>
-        </div>
-
-        <div className="ml-10">
           <ul className={``}>
             <li>Item2</li>
             <li>Item3</li>
             <li>Item4</li>
           </ul>
+        </div>
+
+        <div className="ml-10">
+          <button onClick={toggleMenu}>
+            <HamburgerIcon isOpen={isOpen} />
+          </button>
         </div>
       </div>
     </nav>
@@ -39,6 +39,7 @@ export const NavBar: TobyUITypes.NavBar = () => {
 
 const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
   const currTimer = useRef<number>();
+  const animSeqRef = useRef<0 | 1 | 2>(0);
   const [animSeq, setAnimSeq] = useState<0 | 1 | 2>(0);
   const top =
     animSeq === 0
@@ -58,14 +59,20 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
   useEffect(() => {
     clearInterval(currTimer.current);
     if (!isOpen) {
-      setAnimSeq(1);
-      currTimer.current = window.setTimeout(() => {
-        setAnimSeq(0);
-      }, 300);
+      if (animSeqRef.current === 2) {
+        setAnimSeq(1);
+        animSeqRef.current = 1;
+        currTimer.current = window.setTimeout(() => {
+          setAnimSeq(0);
+          animSeqRef.current = 0;
+        }, 300);
+      }
     } else {
       setAnimSeq(1);
+      animSeqRef.current = 1;
       currTimer.current = window.setTimeout(() => {
         setAnimSeq(2);
+        animSeqRef.current = 2;
       }, 300);
     }
   }, [isOpen]);
@@ -80,7 +87,7 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
       viewBox="0 0 30 30"
     >
       <path
-        className={`transition-transform duration-300 origin-top-left ${top}`}
+        className={`duration-300 origin-top-left ${top}`}
         d="M0 5h30v2H0z"
       />
       <line
