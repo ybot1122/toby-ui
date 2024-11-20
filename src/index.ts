@@ -1,5 +1,7 @@
 export { FAQItem, FAQItemList } from "./components/FAQItem/FAQItem";
 
+type ReactChildren = JSX.Element | JSX.Element[];
+
 export type FAQItem = ({
   question,
   children,
@@ -9,7 +11,7 @@ export type FAQItem = ({
   bold,
 }: {
   question: string;
-  children: JSX.Element | JSX.Element[];
+  children: ReactChildren;
 
   questionFontColor: string;
   borderColor: string;
@@ -19,6 +21,11 @@ export type FAQItem = ({
 export type FAQItemList = ({
   children,
 }: {
-  children: JSX.Element | JSX.Element[];
+  children: ReactChildren;
 }) => JSX.Element;
-export type NavBar = () => JSX.Element;
+export type NavBar = ({ children }: { children: ReactChildren }) => JSX.Element;
+export type NavItem = ({
+  children,
+}: {
+  children: ReactChildren;
+}) => JSX.Element;

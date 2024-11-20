@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const NavBar: TobyUITypes.NavBar = () => {
+export const NavBar: TobyUITypes.NavBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = useCallback(() => {
@@ -18,11 +18,7 @@ export const NavBar: TobyUITypes.NavBar = () => {
         </a>
       </div>
 
-      <ul className={`ml-10 flex-grow flex`}>
-        <NavItem text="Item One" href="#" />
-        <NavItem text="Item TwoTwo" href="#" />
-        <NavItem text="Item" href="#" />
-      </ul>
+      <ul className={`ml-10 flex-grow flex`}>{children}</ul>
 
       <div className="ml-10">
         <button onClick={toggleMenu}>
@@ -33,12 +29,10 @@ export const NavBar: TobyUITypes.NavBar = () => {
   );
 };
 
-const NavItem = ({ text, href }: { text: string; href: string }) => {
+export const NavItem: TobyUITypes.NavItem = ({ children }) => {
   return (
     <li className={`group relative md:text-center uppercase text-md flex-grow`}>
-      <a href={href} className="block p-5">
-        {text}
-      </a>
+      {children}
       <span
         className="opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-blue-300 b-0"
         aria-hidden="true"
