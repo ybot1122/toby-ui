@@ -6,7 +6,7 @@ Collection of Reusable React Components. Please refer to package.json `peerDepen
 
 1. Install toby-ui as a Node package:
 
-`npm i -D @ybot1122/toby-ui`
+`npm i @ybot1122/toby-ui`
 
 2. Add toby-ui to tailwind.config.js:
 
