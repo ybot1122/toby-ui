@@ -23,7 +23,13 @@ export type FAQItemList = ({
 }: {
   children: ReactChildren;
 }) => JSX.Element;
-export type NavBar = ({ children }: { children: ReactChildren }) => JSX.Element;
+export type NavBar = ({
+  children,
+  logo,
+}: {
+  children: ReactChildren;
+  logo: ReactChildren;
+}) => JSX.Element;
 export type NavItem = ({
   children,
 }: {

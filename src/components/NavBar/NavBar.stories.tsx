@@ -25,6 +25,26 @@ const meta = {
     layout: "fullscreen",
   },
   args: {},
+  argTypes: {
+    logo: {
+      options: ["Text", "Image"],
+      mapping: {
+        Text: (
+          <a href="/" className="text-center inline-block text-2xl md:text-4xl">
+            Keenesse
+            <br />
+            Coaching &amp; Consulting
+          </a>
+        ),
+        Image: (
+          <img
+            className="w-[130px] h-[130px]"
+            src="https://www.itsprobablyspicy.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FITS-PROBABLY-SPICY_PRIMARY-LOGO_persimmon-768x768.1b69983d.png&w=384&q=75"
+          />
+        ),
+      },
+    },
+  },
 } satisfies Meta<typeof NavBar>;
 
 export default meta;
@@ -54,5 +74,11 @@ export const Story: Story = {
         </a>
       </NavItem>,
     ],
+    logo: (
+      <p>
+        <span className="text-orange-700">Logo</span>{" "}
+        <span className="text-green-700">Here</span>
+      </p>
+    ),
   },
 };

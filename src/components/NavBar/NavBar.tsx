@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const NavBar: TobyUITypes.NavBar = ({ children }) => {
+export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = useCallback(() => {
@@ -9,14 +9,8 @@ export const NavBar: TobyUITypes.NavBar = ({ children }) => {
   }, [setIsOpen]);
 
   return (
-    <nav className="flex p-4 mx-auto max-w-screen-lg items-center">
-      <div className="">
-        <a href="/" className="">
-          Keenesse
-          <br />
-          Coaching &amp; Consulting
-        </a>
-      </div>
+    <nav className="flex p-4 mx-auto max-w-screen-xl items-center">
+      {logo}
 
       <ul className={`ml-10 flex-grow flex`}>{children}</ul>
 
