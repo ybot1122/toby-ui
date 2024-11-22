@@ -12,9 +12,13 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
     <nav className="flex p-4 mx-auto max-w-screen-xl items-center">
       {logo}
 
-      <ul className={`ml-10 flex-grow flex`}>{children}</ul>
+      <ul
+        className={`absolute right-0 top-0 block md:ml-10 md:flex-grow md:flex`}
+      >
+        {children}
+      </ul>
 
-      <div className="ml-10">
+      <div className="ml-10 justify-self-end md:hidden">
         <button onClick={toggleMenu}>
           <HamburgerIcon isOpen={isOpen} />
         </button>
