@@ -9,11 +9,11 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
   }, [setIsOpen]);
 
   return (
-    <nav className="flex p-4 mx-auto max-w-screen-xl items-center">
-      {logo}
+    <nav className="flex items-center p-4 mx-auto max-w-screen-xl ">
+      <div className="shrink-0">{logo}</div>
 
       <ul
-        className={`absolute right-0 top-0 block md:ml-10 md:flex-grow md:flex`}
+        className={`absolute right-0 top-0 block md:static md:ml-10 md:flex-grow md:flex`}
       >
         {children}
       </ul>

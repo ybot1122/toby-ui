@@ -31,9 +31,8 @@ const meta = {
       mapping: {
         Text: (
           <a href="/" className="text-center inline-block text-2xl md:text-4xl">
-            Keenesse
-            <br />
-            Coaching &amp; Consulting
+            <div>Keenesse</div>
+            <div>Coaching &amp; Consulting</div>
           </a>
         ),
         Image: (
