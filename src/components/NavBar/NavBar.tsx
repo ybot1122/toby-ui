@@ -16,6 +16,14 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
     }, 700);
   }, [setIsOpen, setIsAnimating, isAnimating]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener("click", toggleMenu);
+    } else {
+      document.removeEventListener("click", toggleMenu);
+    }
+  }, [isOpen]);
+
   const right =
     (isOpen ? "translate-x-0" : "translate-x-full") + " md:translate-x-0 ";
   const visible = !isOpen && !isAnimating ? "invisible" : "";
