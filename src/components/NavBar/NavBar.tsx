@@ -9,16 +9,16 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
   }, [setIsOpen]);
 
   return (
-    <nav className="flex items-center p-4 mx-auto max-w-screen-xl ">
+    <nav className="flex items-center px-8 py-4 mx-auto max-w-screen-xl ">
       <div className="shrink-0">{logo}</div>
 
       <ul
-        className={`absolute right-0 top-0 block md:static md:ml-10 md:flex-grow md:flex`}
+        className={`${isOpen ? "" : "hidden"} absolute right-0 top-0 block md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
       >
         {children}
       </ul>
 
-      <div className="ml-10 justify-self-end md:hidden">
+      <div className="ml-auto md:hidden">
         <button onClick={toggleMenu}>
           <HamburgerIcon isOpen={isOpen} />
         </button>
@@ -29,10 +29,12 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
 
 export const NavItem: TobyUITypes.NavItem = ({ children }) => {
   return (
-    <li className={`group relative md:text-center uppercase text-md flex-grow`}>
+    <li
+      className={`group relative md:text-center uppercase text-md flex-grow flex flex-col`}
+    >
       {children}
       <span
-        className="opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-blue-300 b-0"
+        className="opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-blue-300 b-0 mt-auto"
         aria-hidden="true"
       ></span>
     </li>
