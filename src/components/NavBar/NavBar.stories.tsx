@@ -52,22 +52,22 @@ type Story = StoryObj<typeof meta>;
 export const Story: Story = {
   args: {
     children: [
-      <NavItem>
+      <NavItem key="1">
         <a href="#" className="flex items-center md:justify-center p-5">
           Item One
         </a>
       </NavItem>,
-      <NavItem>
+      <NavItem key="2">
         <a href="#" className="flex items-center md:justify-center p-5">
           Item Four Four Four
         </a>
       </NavItem>,
-      <NavItem backgroundColor="bg-green-300">
+      <NavItem backgroundColor="bg-green-300" key="3">
         <a href="#" className="flex items-center md:justify-center p-5">
           Item
         </a>
       </NavItem>,
-      <NavItem hoverBottomColor="bg-purple-500">
+      <NavItem hoverBottomColor="bg-purple-500" key="4">
         <a href="#" className="block p-5">
           Item One <EtsyLogo fill="fill-orange-700" />
         </a>

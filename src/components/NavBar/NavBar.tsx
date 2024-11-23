@@ -2,32 +2,38 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
 export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
+  const [isAnimating, setIsAnimating] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const translateYRef = useRef<number>(0);
 
   const toggleMenu = useCallback(() => {
-    setIsOpen((prev) => !prev);
-    translateYRef.current =
-      navRef?.current?.getBoundingClientRect()?.height ?? 0;
-  }, [setIsOpen]);
+    if (isAnimating) return;
 
-  const translateY = `translate-y-[${translateYRef.current}px] md:translate-y-0`;
+    setIsAnimating((prev) => !prev);
+    setIsOpen((prev) => !prev);
+    window.setTimeout(() => {
+      setIsAnimating((prev) => !prev);
+    }, 700);
+  }, [setIsOpen, setIsAnimating, isAnimating]);
+
+  const right =
+    (isOpen ? "translate-x-0" : "translate-x-full") + " md:translate-x-0 ";
+  const visible = !isOpen && !isAnimating ? "invisible" : "";
 
   return (
     <nav
-      className="relative flex items-center px-8 py-4 mx-auto max-w-screen-xl"
+      className="relative flex items-center px-8 py-4 mx-auto max-w-screen-xl overflow-x-clip"
       ref={navRef}
     >
       <div className="shrink-0">{logo}</div>
 
       <ul
-        className={`${isOpen ? "" : "hidden"} absolute right-0 top-0 block ${translateY} md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
+        className={`w-[75vw] absolute ${right} ${visible} right-0 top-full duration-700 ease-in-out transition-transform block z-20 md:visible md:w-full md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
       >
         {children}
       </ul>
 
-      <div className="ml-auto md:hidden">
+      <div className="ml-auto md:hidden z-50">
         <button onClick={toggleMenu}>
           <HamburgerIcon isOpen={isOpen} />
         </button>
@@ -38,7 +44,7 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
 
 export const NavItem: TobyUITypes.NavItem = ({
   children,
-  backgroundColor = "",
+  backgroundColor = "bg-zinc-100",
   hoverBottomColor = "bg-blue-300",
 }) => {
   return (
