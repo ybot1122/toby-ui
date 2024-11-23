@@ -22,7 +22,9 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
     } else {
       document.removeEventListener("click", toggleMenu);
     }
-  }, [isOpen]);
+
+    return () => document.removeEventListener("click", toggleMenu);
+  }, [isOpen, toggleMenu]);
 
   const right =
     (isOpen ? "translate-x-0" : "translate-x-full") + " md:translate-x-0 ";
