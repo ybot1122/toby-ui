@@ -27,17 +27,17 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
     >
       <div className="shrink-0">{logo}</div>
 
-      <ul
-        className={`w-[75vw] absolute ${right} ${visible} right-0 top-full duration-700 ease-in-out transition-transform block z-20 md:visible md:w-full md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
-      >
-        {children}
-      </ul>
-
       <div className="ml-auto md:hidden z-50">
         <button onClick={toggleMenu}>
           <HamburgerIcon isOpen={isOpen} />
         </button>
       </div>
+
+      <ul
+        className={`w-[75vw] absolute ${right} ${visible} right-0 top-full duration-700 ease-in-out transition-transform block z-20 md:visible md:w-full md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
+      >
+        {children}
+      </ul>
     </nav>
   );
 };
