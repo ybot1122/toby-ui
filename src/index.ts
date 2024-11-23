@@ -32,6 +32,10 @@ export type NavBar = ({
 }) => JSX.Element;
 export type NavItem = ({
   children,
+  backgroundColor,
+  hoverBottomColor,
 }: {
   children: ReactChildren;
+  backgroundColor?: string;
+  hoverBottomColor?: string;
 }) => JSX.Element;

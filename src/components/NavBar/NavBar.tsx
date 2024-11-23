@@ -36,14 +36,18 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
   );
 };
 
-export const NavItem: TobyUITypes.NavItem = ({ children }) => {
+export const NavItem: TobyUITypes.NavItem = ({
+  children,
+  backgroundColor = "",
+  hoverBottomColor = "bg-blue-300",
+}) => {
   return (
     <li
-      className={`group relative md:text-center uppercase text-md flex-grow flex flex-col`}
+      className={`group relative md:text-center uppercase text-md flex-grow flex flex-col ${backgroundColor}`}
     >
       {children}
       <span
-        className="opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-blue-300 b-0 mt-auto"
+        className={`opacity-0 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] ${hoverBottomColor} b-0 mt-auto`}
         aria-hidden="true"
       ></span>
     </li>

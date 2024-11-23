@@ -62,12 +62,12 @@ export const Story: Story = {
           Item Four Four Four
         </a>
       </NavItem>,
-      <NavItem>
+      <NavItem backgroundColor="bg-green-300">
         <a href="#" className="flex items-center md:justify-center p-5">
           Item
         </a>
       </NavItem>,
-      <NavItem>
+      <NavItem hoverBottomColor="bg-purple-500">
         <a href="#" className="block p-5">
           Item One <EtsyLogo fill="fill-orange-700" />
         </a>
