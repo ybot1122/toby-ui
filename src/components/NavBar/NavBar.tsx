@@ -3,17 +3,26 @@ import * as TobyUITypes from "../..";
 
 export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const translateYRef = useRef<number>(0);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
+    translateYRef.current =
+      navRef?.current?.getBoundingClientRect()?.height ?? 0;
   }, [setIsOpen]);
 
+  const translateY = `translate-y-[${translateYRef.current}px] md:translate-y-0`;
+
   return (
-    <nav className="flex items-center px-8 py-4 mx-auto max-w-screen-xl ">
+    <nav
+      className="relative flex items-center px-8 py-4 mx-auto max-w-screen-xl"
+      ref={navRef}
+    >
       <div className="shrink-0">{logo}</div>
 
       <ul
-        className={`${isOpen ? "" : "hidden"} absolute right-0 top-0 block md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
+        className={`${isOpen ? "" : "hidden"} absolute right-0 top-0 block ${translateY} md:static md:ml-5 md:flex-grow md:flex md:items-stretch`}
       >
         {children}
       </ul>

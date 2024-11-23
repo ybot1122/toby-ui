@@ -53,17 +53,17 @@ export const Story: Story = {
   args: {
     children: [
       <NavItem>
-        <a href="#" className="flex items-center justify-center p-5">
+        <a href="#" className="flex items-center md:justify-center p-5">
           Item One
         </a>
       </NavItem>,
       <NavItem>
-        <a href="#" className="flex items-center justify-center p-5">
+        <a href="#" className="flex items-center md:justify-center p-5">
           Item Four Four Four
         </a>
       </NavItem>,
       <NavItem>
-        <a href="#" className="flex items-center justify-center p-5">
+        <a href="#" className="flex items-center md:justify-center p-5">
           Item
         </a>
       </NavItem>,
