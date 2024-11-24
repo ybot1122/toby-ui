@@ -51,6 +51,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Story: Story = {
   args: {
+    iconFill: "fill-blue-500",
     children: [
       <NavItem key="1">
         <a href="#" className="flex items-center md:justify-center p-5">

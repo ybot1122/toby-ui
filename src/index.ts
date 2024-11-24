@@ -26,9 +26,11 @@ export type FAQItemList = ({
 export type NavBar = ({
   children,
   logo,
+  iconFill,
 }: {
   children: ReactChildren;
   logo: ReactChildren;
+  iconFill: string;
 }) => JSX.Element;
 export type NavItem = ({
   children,

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
+export const NavBar: TobyUITypes.NavBar = ({ children, logo, iconFill }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -39,7 +39,7 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo }) => {
 
       <div className="ml-auto md:hidden z-50">
         <button onClick={toggleMenu}>
-          <HamburgerIcon isOpen={isOpen} />
+          <HamburgerIcon isOpen={isOpen} fill={iconFill} />
         </button>
       </div>
 
@@ -70,7 +70,7 @@ export const NavItem: TobyUITypes.NavItem = ({
   );
 };
 
-const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
+const HamburgerIcon = ({ isOpen, fill }: { isOpen: boolean; fill: string }) => {
   const currTimer = useRef<number>();
   const animSeqRef = useRef<0 | 1 | 2>(0);
   const [animSeq, setAnimSeq] = useState<0 | 1 | 2>(0);
@@ -112,25 +112,19 @@ const HamburgerIcon = ({ isOpen }: { isOpen: boolean }) => {
 
   return (
     <svg
-      id="burger"
       width="30"
       height={30}
-      className={isOpen ? "o" : "c"}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 30 30"
+      className={`${fill}`}
     >
       <path
         className={`duration-300 origin-top-left ${top}`}
         d="M0 5h30v2H0z"
       />
-      <line
+      <path
         className={`transition-transform duration-300 origin-center ${mid}`}
-        x1="0"
-        y1="15"
-        x2="30"
-        y2="15"
-        stroke="black"
-        strokeWidth="2"
+        d="M0 16 h 30 v -2 h -30 z"
       />
       <path
         className={`transition-transform duration-300 origin-bottom-left ${bot}`}
