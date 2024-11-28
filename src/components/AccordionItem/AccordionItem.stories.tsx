@@ -14,7 +14,7 @@ const meta = {
   args: {},
 } satisfies Meta<typeof AccordionItemList>;
 
-const faqs = [
+const items = [
   {
     q: "What can I expect during a coaching session?",
     a: [
@@ -61,7 +61,7 @@ type Story = StoryObj<typeof meta>;
 export const Story: Story = {
   args: {
     children: [
-      ...faqs.map((f) => (
+      ...items.map((f) => (
         <AccordionItem
           question={f.q}
           key={f.q}
