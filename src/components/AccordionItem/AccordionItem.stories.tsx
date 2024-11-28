@@ -83,7 +83,10 @@ export const Story: Story = {
         fillColor="fill-blue-300"
         borderColor="broder-slate-300"
       >
-        <img alt="logo" src="https://www.itsprobablyspicy.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdryy6uo6k%2Fimage%2Fupload%2Fv1709668872%2Fits-probably-spicy%2Fstewtable2.jpg&w=1080&q=75" />
+        <img
+          alt="logo"
+          src="https://www.itsprobablyspicy.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdryy6uo6k%2Fimage%2Fupload%2Fv1709668872%2Fits-probably-spicy%2Fstewtable2.jpg&w=1080&q=75"
+        />
       </AccordionItem>,
     ],
   },

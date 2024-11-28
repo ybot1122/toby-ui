@@ -45,7 +45,9 @@ export const AccordionItem: TobyUITypes.AccordionItem = ({
   );
 };
 
-export const AccordionItemList: TobyUITypes.AccordionItemList = ({ children }) => {
+export const AccordionItemList: TobyUITypes.AccordionItemList = ({
+  children,
+}) => {
   return <ul className="">{children}</ul>;
 };
 
