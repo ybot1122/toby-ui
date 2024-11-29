@@ -20,6 +20,13 @@ module.exports = {
 }
 ```
 
+### Adding a new Component
+1. Create its directory under `src/components`.
+2. Add its implementation file, and storybook file into that directory.
+3. In `package.json` add the entry for it in `exports` array.
+4. In `rollup.config.mjs` add the path as a file for `input`.
+5. In `src/index.ts` put any type definitions you will use for the new component.
+
 ### Publish and Release
 
 1. Make a PR and merge to bump the version in package.json
