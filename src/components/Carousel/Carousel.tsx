@@ -37,6 +37,7 @@ export const Carousel: TobyUITypes.Carousel = ({ slidesToShow, children }) => {
       {prevButton}
       <div className="overflow-hidden w-full" ref={containerRef}>
         <ul
+          className="transition-transform"
           style={{
             width: `${totalWidth}px`,
             transform: `translateX(-${itemWidth * startIndex}px)`,
