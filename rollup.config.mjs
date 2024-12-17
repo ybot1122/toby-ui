@@ -8,6 +8,7 @@ const config = {
     "src/components/FAQItem/FAQItem.tsx",
     "src/components/HelloWorld/HelloWorld.tsx",
     "src/components/NavBar/NavBar.tsx",
+    "src/components/Carousel/Carousel.tsx",
     "src/index.ts",
   ],
   output: {

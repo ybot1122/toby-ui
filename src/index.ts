@@ -41,3 +41,8 @@ export type NavItem = ({
   backgroundColor?: string;
   hoverBottomColor?: string;
 }) => JSX.Element;
+export type Carousel = ({
+  slidesToShow,
+}: {
+  slidesToShow: number;
+}) => JSX.Element;
