@@ -44,7 +44,11 @@ export type NavItem = ({
 export type Carousel = ({
   slidesToShow,
   children,
+  prevButton,
+  nextButton,
 }: {
   slidesToShow: number;
   children: React.ReactNode[];
+  prevButton: (onClick: () => void) => React.ReactNode;
+  nextButton: (onClick: () => void) => React.ReactNode;
 }) => JSX.Element;

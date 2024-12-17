@@ -42,5 +42,7 @@ export const Story: Story = {
         </div>
       );
     }),
+    prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
+    nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
   },
 };

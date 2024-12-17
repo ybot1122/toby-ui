@@ -3,7 +3,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const Carousel: TobyUITypes.Carousel = ({ slidesToShow, children }) => {
+export const Carousel: TobyUITypes.Carousel = ({
+  slidesToShow,
+  children,
+  prevButton,
+  nextButton,
+}) => {
   const [width, setWidth] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,14 +32,15 @@ export const Carousel: TobyUITypes.Carousel = ({ slidesToShow, children }) => {
   const itemWidth = Math.round(width / slidesToShow);
   const totalWidth = Math.round(children.length * itemWidth);
 
-  console.log(itemWidth, totalWidth);
+  // TODO: handle resize
 
-  const prevButton = <button onClick={goPrev}>Prev</button>;
-  const nextButton = <button onClick={goNext}>Next</button>;
+  // TODO: handle touch
+
+  // TODO: add dots
 
   return (
     <div className="flex w-full">
-      {prevButton}
+      {prevButton(goPrev)}
       <div className="overflow-hidden w-full" ref={containerRef}>
         <ul
           className="transition-transform"
@@ -44,13 +50,14 @@ export const Carousel: TobyUITypes.Carousel = ({ slidesToShow, children }) => {
           }}
         >
           {children.map((c) => (
+            // TODO: add key
             <div className="inline-block" style={{ width: `${itemWidth}px` }}>
               {c}
             </div>
           ))}
         </ul>
       </div>
-      {nextButton}
+      {nextButton(goNext)}
     </div>
   );
 };
