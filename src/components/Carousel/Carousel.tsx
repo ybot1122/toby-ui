@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const Carousel: TobyUITypes.Carousel = ({ slidesToShow }) => {
+export const Carousel: TobyUITypes.Carousel = ({ slidesToShow, children }) => {
   const [width, setWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -11,26 +11,8 @@ export const Carousel: TobyUITypes.Carousel = ({ slidesToShow }) => {
     setWidth(containerRef.current?.getBoundingClientRect().width);
   }, []);
 
-  const items = [];
-
   const itemWidth = Math.round(width / slidesToShow);
-
-  for (let i = 0; i < 12; i++) {
-    items.push(
-      <li
-        key={i}
-        className="inline-block"
-        style={{
-          width: `${itemWidth}px`,
-          background: i % 2 === 0 ? "red" : "blue",
-        }}
-      >
-        Item {i}
-      </li>,
-    );
-  }
-
-  const totalWidth = Math.round(items.length * itemWidth);
+  const totalWidth = Math.round(children.length * itemWidth);
 
   console.log(itemWidth, totalWidth);
 
@@ -41,7 +23,13 @@ export const Carousel: TobyUITypes.Carousel = ({ slidesToShow }) => {
     <div className="flex w-full">
       {prevButton}
       <div className="overflow-hidden w-full" ref={containerRef}>
-        <ul style={{ width: `${totalWidth}px` }}>{items}</ul>
+        <ul style={{ width: `${totalWidth}px` }}>
+          {children.map((c) => (
+            <div className="inline-block" style={{ width: `${itemWidth}px` }}>
+              {c}
+            </div>
+          ))}
+        </ul>
       </div>
       {nextButton}
     </div>

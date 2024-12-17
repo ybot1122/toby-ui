@@ -43,6 +43,8 @@ export type NavItem = ({
 }) => JSX.Element;
 export type Carousel = ({
   slidesToShow,
+  children,
 }: {
   slidesToShow: number;
+  children: React.ReactNode[];
 }) => JSX.Element;
