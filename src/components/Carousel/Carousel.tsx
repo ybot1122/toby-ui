@@ -12,6 +12,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   const [width, setWidth] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const transformRef = useRef(0);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
   const [xOffset, setXOffset] = useState(0);
@@ -36,6 +37,7 @@ export const Carousel: TobyUITypes.Carousel = ({
 
   const itemWidth = Math.ceil(width / slidesToShow);
   const totalWidth = Math.ceil(children.length * itemWidth);
+  transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   // handle resize
   useEffect(() => {
@@ -50,7 +52,7 @@ export const Carousel: TobyUITypes.Carousel = ({
     return () => resizeObserver.disconnect();
   }, [setWidth]);
 
-  // TODO: handle touch
+  // handle touch
   const pointerDownCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {
       let x = 0;
@@ -68,32 +70,19 @@ export const Carousel: TobyUITypes.Carousel = ({
     [],
   );
 
-  const pointerCancelCb = useCallback((e: unknown) => {
-    console.log(e);
-    console.log("cancelled?");
-  }, []);
+  const pointerUpCb = useCallback(() => {
+    if (!pointerStartData.current) return;
 
-  const pointerUpCb = useCallback(
-    (event: PointerEvent | TouchEvent | MouseEvent) => {
-      let x = 0;
-      if (isPointerEvent(event) || isMouseEvent(event)) {
-        x = event.clientY;
-      } else {
-        x = event.changedTouches["0"].clientY;
-      }
+    const nextIndex = Math.min(
+      children.length - slidesToShow,
+      Math.max(0, Math.round(transformRef.current / itemWidth) * -1),
+    );
 
-      if (!pointerStartData.current) return;
-
-      // TODO: implement logic to determine which item is active
-
-      console.log(x);
-
-      pointerStartData.current = undefined;
-      xOffsetRef.current = 0;
-      setXOffset(0);
-    },
-    [setXOffset],
-  );
+    pointerStartData.current = undefined;
+    xOffsetRef.current = 0;
+    setXOffset(0);
+    setStartIndex(nextIndex);
+  }, [setXOffset, itemWidth, setStartIndex]);
 
   const pointerMoveCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {
@@ -116,9 +105,7 @@ export const Carousel: TobyUITypes.Carousel = ({
     addEventListener("pointerdown", pointerDownCb);
     addEventListener("pointerup", pointerUpCb);
     addEventListener("pointermove", pointerMoveCb);
-    addEventListener("pointercancel", pointerCancelCb);
     addEventListener("touchstart", pointerDownCb);
-    addEventListener("touchcancel", pointerCancelCb);
     addEventListener("touchmove", pointerMoveCb);
     addEventListener("touchend", pointerUpCb);
 
@@ -126,18 +113,13 @@ export const Carousel: TobyUITypes.Carousel = ({
       removeEventListener("pointerdown", pointerDownCb);
       removeEventListener("pointerup", pointerUpCb);
       removeEventListener("pointermove", pointerMoveCb);
-      removeEventListener("pointercancel", pointerCancelCb);
       removeEventListener("touchstart", pointerDownCb);
-      removeEventListener("touchcancel", pointerCancelCb);
       removeEventListener("touchmove", pointerMoveCb);
       removeEventListener("touchend", pointerUpCb);
     };
   }, [pointerDownCb, pointerUpCb]);
 
   // TODO: add dots
-
-  const transform = -1 * itemWidth * startIndex + xOffset;
-  console.log(transform);
 
   return (
     <div className="flex w-full">
@@ -147,7 +129,7 @@ export const Carousel: TobyUITypes.Carousel = ({
           className={xOffset !== 0 ? "" : "transition-transform"}
           style={{
             width: `${totalWidth}px`,
-            transform: `translateX(${transform}px)`,
+            transform: `translateX(${transformRef.current}px)`,
           }}
         >
           {children.map((c, ind) => (
@@ -167,8 +149,8 @@ export const Carousel: TobyUITypes.Carousel = ({
 };
 
 function isPointerEvent(e: object): e is PointerEvent {
-  return "clientY" in e && "ctrlKey" in e && e.ctrlKey === undefined;
+  return "clientX" in e && "ctrlKey" in e && e.ctrlKey === undefined;
 }
 function isMouseEvent(e: object): e is MouseEvent {
-  return "clientY" in e && "ctrlKey" in e && e.ctrlKey !== undefined;
+  return "clientX" in e && "ctrlKey" in e && e.ctrlKey !== undefined;
 }
