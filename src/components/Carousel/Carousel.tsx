@@ -32,7 +32,18 @@ export const Carousel: TobyUITypes.Carousel = ({
   const itemWidth = Math.ceil(width / slidesToShow);
   const totalWidth = Math.ceil(children.length * itemWidth);
 
-  // TODO: handle resize
+  // handle resize
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      setWidth(entries[0].contentRect.width);
+    });
+
+    if (containerRef?.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [setWidth]);
 
   // TODO: handle touch
 
@@ -49,9 +60,12 @@ export const Carousel: TobyUITypes.Carousel = ({
             transform: `translateX(-${itemWidth * startIndex}px)`,
           }}
         >
-          {children.map((c) => (
-            // TODO: add key
-            <div className="inline-block" style={{ width: `${itemWidth}px` }}>
+          {children.map((c, ind) => (
+            <div
+              className="inline-block"
+              style={{ width: `${itemWidth}px` }}
+              key={ind}
+            >
               {c}
             </div>
           ))}
