@@ -10,6 +10,10 @@
     "./NavBar": {
       "types": "./dist/components/NavBar/NavBar.d.ts",
       "default": "./dist/components/NavBar/NavBar.js"
+    },
+    "./Carousel": {
+      "types": "./dist/components/Carousel/Carousel.d.ts",
+      "default": "./dist/components/Carousel/Carousel.js"
     }
   },
   "files": [

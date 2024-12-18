@@ -39,3 +39,16 @@ export type NavItem = ({
   backgroundColor?: string;
   hoverBottomColor?: string;
 }) => JSX.Element;
+export type Carousel = ({
+  slidesToShow,
+  children,
+  prevButton,
+  nextButton,
+  responsive,
+}: {
+  slidesToShow: number;
+  children: React.ReactNode[];
+  prevButton: (onClick: () => void) => React.ReactNode;
+  nextButton: (onClick: () => void) => React.ReactNode;
+  responsive?: { breakpoint: number; slidesToShow: number }[];
+}) => JSX.Element;
