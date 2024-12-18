@@ -29,8 +29,8 @@ export const Carousel: TobyUITypes.Carousel = ({
     }
   }, [startIndex, setStartIndex]);
 
-  const itemWidth = Math.round(width / slidesToShow);
-  const totalWidth = Math.round(children.length * itemWidth);
+  const itemWidth = Math.ceil(width / slidesToShow);
+  const totalWidth = Math.ceil(children.length * itemWidth);
 
   // TODO: handle resize
 
