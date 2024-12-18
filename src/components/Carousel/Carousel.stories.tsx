@@ -44,5 +44,19 @@ export const Story: Story = {
     }),
     prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
     nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
+    responsive: [
+      {
+        breakpoint: 1620,
+        slidesToShow: 3,
+      },
+      {
+        breakpoint: 1240,
+        slidesToShow: 2,
+      },
+      {
+        breakpoint: 760,
+        slidesToShow: 1,
+      },
+    ],
   },
 };

@@ -44,9 +44,11 @@ export type Carousel = ({
   children,
   prevButton,
   nextButton,
+  responsive,
 }: {
   slidesToShow: number;
   children: React.ReactNode[];
   prevButton: (onClick: () => void) => React.ReactNode;
   nextButton: (onClick: () => void) => React.ReactNode;
+  responsive?: { breakpoint: number; slidesToShow: number }[];
 }) => JSX.Element;
