@@ -23,6 +23,13 @@ export const Carousel: TobyUITypes.Carousel = ({
     setWidth(containerRef.current?.getBoundingClientRect().width);
   }, []);
 
+  const goToSlide = useCallback(
+    (ind: number) => () => {
+      setStartIndex(ind);
+    },
+    [setStartIndex],
+  );
+
   const goNext = useCallback(() => {
     if (startIndex + slidesToShow < children.length) {
       setStartIndex(startIndex + 1);
@@ -102,49 +109,63 @@ export const Carousel: TobyUITypes.Carousel = ({
   );
 
   useEffect(() => {
-    addEventListener("pointerdown", pointerDownCb);
-    addEventListener("pointerup", pointerUpCb);
-    addEventListener("pointermove", pointerMoveCb);
-    addEventListener("touchstart", pointerDownCb);
-    addEventListener("touchmove", pointerMoveCb);
-    addEventListener("touchend", pointerUpCb);
+    containerRef.current.addEventListener("pointerdown", pointerDownCb);
+    containerRef.current.addEventListener("pointerup", pointerUpCb);
+    containerRef.current.addEventListener("pointermove", pointerMoveCb);
+    containerRef.current.addEventListener("touchstart", pointerDownCb);
+    containerRef.current.addEventListener("touchmove", pointerMoveCb);
+    containerRef.current.addEventListener("touchend", pointerUpCb);
 
     return () => {
-      removeEventListener("pointerdown", pointerDownCb);
-      removeEventListener("pointerup", pointerUpCb);
-      removeEventListener("pointermove", pointerMoveCb);
-      removeEventListener("touchstart", pointerDownCb);
-      removeEventListener("touchmove", pointerMoveCb);
-      removeEventListener("touchend", pointerUpCb);
+      containerRef.current.removeEventListener("pointerdown", pointerDownCb);
+      containerRef.current.removeEventListener("pointerup", pointerUpCb);
+      containerRef.current.removeEventListener("pointermove", pointerMoveCb);
+      containerRef.current.removeEventListener("touchstart", pointerDownCb);
+      containerRef.current.removeEventListener("touchmove", pointerMoveCb);
+      containerRef.current.removeEventListener("touchend", pointerUpCb);
     };
-  }, [pointerDownCb, pointerUpCb]);
+  }, [pointerDownCb, pointerUpCb, pointerMoveCb]);
 
   // TODO: add dots
+  const dots = [];
+  for (let i = 0; i < children.length - slidesToShow + 1; i++) {
+    dots.push(
+      <li
+        key={i}
+        className={`w-[20px] h-[20px] px-5 mt-5 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
+      >
+        <button onClick={goToSlide(i)}>•</button>
+      </li>,
+    );
+  }
 
   return (
-    <div className="flex w-full">
-      {prevButton(goPrev)}
-      <div className="overflow-hidden w-full" ref={containerRef}>
-        <ul
-          className={xOffset !== 0 ? "" : "transition-transform"}
-          style={{
-            width: `${totalWidth}px`,
-            transform: `translateX(${transformRef.current}px)`,
-          }}
-        >
-          {children.map((c, ind) => (
-            <div
-              className="inline-block"
-              style={{ width: `${itemWidth}px` }}
-              key={ind}
-            >
-              {c}
-            </div>
-          ))}
-        </ul>
+    <>
+      <div className="flex w-full">
+        {prevButton(goPrev)}
+        <div className="overflow-hidden w-full" ref={containerRef}>
+          <ul
+            className={xOffset !== 0 ? "" : "transition-transform"}
+            style={{
+              width: `${totalWidth}px`,
+              transform: `translateX(${transformRef.current}px)`,
+            }}
+          >
+            {children.map((c, ind) => (
+              <li
+                className="inline-block"
+                style={{ width: `${itemWidth}px` }}
+                key={ind}
+              >
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {nextButton(goNext)}
       </div>
-      {nextButton(goNext)}
-    </div>
+      <ul className="flex justify-center">{dots}</ul>
+    </>
   );
 };
 
