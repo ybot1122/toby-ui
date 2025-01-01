@@ -7,6 +7,17 @@ import React, {
 } from "react";
 import * as TobyUITypes from "../..";
 
+function getResponsiveMatch(
+  responsive: { breakpoint: number; slidesToShow: number }[],
+  width: number,
+) {
+  const sortedResponsive = responsive.sort(
+    (a, b) => a.breakpoint - b.breakpoint,
+  );
+  const result = sortedResponsive.find((r) => r.breakpoint >= width);
+  return result?.slidesToShow;
+}
+
 export const Carousel: TobyUITypes.Carousel = ({
   slidesToShow: slidesToShowProp,
   children,
@@ -14,12 +25,11 @@ export const Carousel: TobyUITypes.Carousel = ({
   nextButton,
   responsive: responsiveProp = [],
 }) => {
-  const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
-  const [width, setWidth] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(
+    getResponsiveMatch(responsiveProp, window.innerWidth) || slidesToShowProp,
+  );
   const [startIndex, setStartIndex] = useState(0);
-  const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const transformRef = useRef(0);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
   const [xOffset, setXOffset] = useState(0);
@@ -45,40 +55,27 @@ export const Carousel: TobyUITypes.Carousel = ({
     }
   }, [startIndex, setStartIndex]);
 
-  const itemWidth = Math.ceil(width / slidesToShow);
-  const totalWidth = Math.ceil(children.length * itemWidth);
-  transformRef.current = -1 * itemWidth * startIndex + xOffset;
-
-  useEffect(() => {
-    const sortedResponsive = responsiveProp.sort(
-      (a, b) => a.breakpoint - b.breakpoint,
-    );
-    setResponsive(sortedResponsive);
-  }, [responsiveProp, setResponsive]);
-
   // handle resize
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
-      setWidth(containerWidth);
 
-      const responsiveMatch = responsive.find(
-        (r) => containerWidth < r.breakpoint,
+      const responsiveMatch = getResponsiveMatch(
+        responsiveProp,
+        containerWidth,
       );
 
       if (responsiveMatch) {
-        setSlidesToShow(responsiveMatch.slidesToShow);
+        setSlidesToShow(responsiveMatch);
       } else {
         setSlidesToShow(slidesToShowProp);
       }
     });
 
-    if (containerRef?.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+    resizeObserver.observe(document.body);
 
     return () => resizeObserver.disconnect();
-  }, [setWidth, responsive, setSlidesToShow]);
+  }, [setSlidesToShow]);
 
   // handle touch
   const pointerDownCb = useCallback(
@@ -101,16 +98,21 @@ export const Carousel: TobyUITypes.Carousel = ({
   const pointerUpCb = useCallback(() => {
     if (!pointerStartData.current) return;
 
-    const nextIndex = Math.min(
+    const itemWidth = containerRef.current?.clientWidth / slidesToShow;
+
+    const offset = xOffsetRef.current;
+    const newIndex = startIndex - Math.round(offset / itemWidth);
+
+    const clampedIndex = Math.min(
       children.length - slidesToShow,
-      Math.max(0, Math.round(transformRef.current / itemWidth) * -1),
+      Math.max(0, newIndex),
     );
 
     pointerStartData.current = undefined;
     xOffsetRef.current = 0;
     setXOffset(0);
-    setStartIndex(nextIndex);
-  }, [setXOffset, itemWidth, setStartIndex]);
+    setStartIndex(clampedIndex);
+  }, [setXOffset, setStartIndex, slidesToShow, startIndex]);
 
   const pointerMoveCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {
@@ -162,28 +164,28 @@ export const Carousel: TobyUITypes.Carousel = ({
     return dotsArray;
   }, [children.length, slidesToShow, startIndex, goToSlide]);
 
+  const itemWidth = 100 / slidesToShow;
+
   return (
     <>
       <div className="flex w-full">
         {prevButton(goPrev)}
         <div className="overflow-hidden w-full" ref={containerRef}>
           <ul
-            className={xOffset !== 0 ? "" : "transition-transform"}
+            className={`${xOffset !== 0 ? "" : "transition-transform"} whitespace-nowrap w-full`}
             style={{
-              width: `${totalWidth}px`,
-              transform: `translateX(${transformRef.current}px)`,
+              transform: `translateX(-${itemWidth * startIndex}%) translateX(${xOffset}px)`,
             }}
           >
-            {width &&
-              children.map((c, ind) => (
-                <li
-                  className="inline-block"
-                  style={{ width: `${itemWidth}px` }}
-                  key={ind}
-                >
-                  {c}
-                </li>
-              ))}
+            {children.map((c, ind) => (
+              <li
+                className="inline-block whitespace-normal"
+                style={{ width: `${itemWidth}%` }}
+                key={ind}
+              >
+                {c}
+              </li>
+            ))}
           </ul>
         </div>
         {nextButton(goNext)}
