@@ -46,7 +46,6 @@ export const Carousel: TobyUITypes.Carousel = ({
   }, [startIndex, setStartIndex]);
 
   const itemWidth = Math.ceil(width / slidesToShow);
-  const totalWidth = Math.ceil(children.length * itemWidth);
   transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   useEffect(() => {
@@ -168,22 +167,21 @@ export const Carousel: TobyUITypes.Carousel = ({
         {prevButton(goPrev)}
         <div className="overflow-hidden w-full" ref={containerRef}>
           <ul
-            className={xOffset !== 0 ? "" : "transition-transform"}
+            className={`${xOffset !== 0 ? "" : "transition-transform"} whitespace-nowrap`}
             style={{
-              width: `${totalWidth}px`,
+              width: `100%`,
               transform: `translateX(${transformRef.current}px)`,
             }}
           >
-            {width &&
-              children.map((c, ind) => (
-                <li
-                  className="inline-block"
-                  style={{ width: `${itemWidth}px` }}
-                  key={ind}
-                >
-                  {c}
-                </li>
-              ))}
+            {children.map((c, ind) => (
+              <li
+                className="inline-block whitespace-normal"
+                style={{ width: `${100 / slidesToShow}%` }}
+                key={ind}
+              >
+                {c}
+              </li>
+            ))}
           </ul>
         </div>
         {nextButton(goNext)}
