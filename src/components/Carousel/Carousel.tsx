@@ -9,8 +9,18 @@ import * as TobyUITypes from "../..";
 
 function getResponsiveMatch(
   responsive: { breakpoint: number; slidesToShow: number }[],
-  width: number,
+  widthProp?: number,
 ) {
+  let width = widthProp;
+
+  if (!width) {
+    if (typeof window === "undefined") {
+      return null;
+    }
+
+    width = window.innerWidth;
+  }
+
   const sortedResponsive = responsive.sort(
     (a, b) => a.breakpoint - b.breakpoint,
   );
@@ -26,10 +36,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   responsive: responsiveProp = [],
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(
-    getResponsiveMatch(
-      responsiveProp,
-      window?.innerWidth || document?.body?.clientWidth || 0,
-    ) || slidesToShowProp,
+    getResponsiveMatch(responsiveProp) || slidesToShowProp,
   );
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
