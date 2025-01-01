@@ -174,15 +174,16 @@ export const Carousel: TobyUITypes.Carousel = ({
               transform: `translateX(${transformRef.current}px)`,
             }}
           >
-            {children.map((c, ind) => (
-              <li
-                className="inline-block"
-                style={{ width: `${itemWidth}px` }}
-                key={ind}
-              >
-                {c}
-              </li>
-            ))}
+            {width &&
+              children.map((c, ind) => (
+                <li
+                  className="inline-block"
+                  style={{ width: `${itemWidth}px` }}
+                  key={ind}
+                >
+                  {c}
+                </li>
+              ))}
           </ul>
         </div>
         {nextButton(goNext)}
