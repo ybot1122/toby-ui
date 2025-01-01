@@ -1,6 +1,6 @@
 type ReactChildren = JSX.Element | JSX.Element[];
 
-export type AccordionItem = ({
+export type FAQItem = ({
   question,
   children,
   questionFontColor,
@@ -16,7 +16,7 @@ export type AccordionItem = ({
   fillColor: string;
   bold?: boolean;
 }) => JSX.Element;
-export type AccordionItemList = ({
+export type FAQItemList = ({
   children,
 }: {
   children: ReactChildren;
