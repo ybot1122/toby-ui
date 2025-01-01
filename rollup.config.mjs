@@ -12,6 +12,7 @@ const config = {
     "src/sdk/cloudinary/getImages.ts",
     "src/sdk/cloudinary/uploadImage.ts",
     "src/sdk/github/getUser.ts",
+    "src/sdk/github/getRepositoryContent.ts",
     "src/index.ts",
   ],
   output: {

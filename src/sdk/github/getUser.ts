@@ -35,7 +35,11 @@ interface GithubUser {
   updated_at: string;
 }
 
-export async function getUser(token: string): Promise<GithubUser> {
+export async function getUser({
+  token,
+}: {
+  token: string;
+}): Promise<GithubUser> {
   try {
     const response = await fetch(`${GITHUB_API_URL}/user`, {
       headers: {

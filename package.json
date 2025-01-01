@@ -26,6 +26,10 @@
     "./Sdk/GitHub/getUser": {
       "types": "./dist/sdk/github/getUser.d.ts",
       "default": "./dist/sdk/github/getUser.js"
+    },
+    "./Sdk/GitHub/getRepositoryContent": {
+      "types": "./dist/sdk/github/getRepositoryContent.d.ts",
+      "default": "./dist/sdk/github/getRepositoryContent.js"
     }
   },
   "files": [
