@@ -9,18 +9,8 @@ import * as TobyUITypes from "../..";
 
 function getResponsiveMatch(
   responsive: { breakpoint: number; slidesToShow: number }[],
-  widthProp?: number,
+  width: number,
 ) {
-  let width = widthProp;
-
-  if (!width) {
-    if (typeof window === "undefined") {
-      return null;
-    }
-
-    width = window.innerWidth;
-  }
-
   const sortedResponsive = responsive.sort(
     (a, b) => a.breakpoint - b.breakpoint,
   );
@@ -35,9 +25,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   nextButton,
   responsive: responsiveProp = [],
 }) => {
-  const [slidesToShow, setSlidesToShow] = useState(
-    getResponsiveMatch(responsiveProp) || slidesToShowProp,
-  );
+  const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   // xOffset ref and state should always be set together.
