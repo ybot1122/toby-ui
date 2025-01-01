@@ -1,4 +1,5 @@
 import crypto from "crypto";
+import { CloudinaryResource } from "../..";
 
 export async function uploadImage({
   imageFile,
@@ -7,6 +8,7 @@ export async function uploadImage({
   cloudinary_cloud_name,
   public_id,
   folder,
+  upload_preset,
 }: {
   imageFile: File;
   cloudinary_key: string;
@@ -14,7 +16,8 @@ export async function uploadImage({
   cloudinary_cloud_name: string;
   public_id: string;
   folder: string;
-}): Promise<string> {
+  upload_preset: string;
+}): Promise<CloudinaryResource> {
   if (!cloudinary_key || !cloudinary_secret) {
     throw new Error("Cloudinary credentials not set");
   }
@@ -27,7 +30,6 @@ export async function uploadImage({
 
   const formData = new FormData();
   const timestamp = Date.now().toString();
-  const upload_preset = "u4kwvaih";
   formData.append("file", imageFile);
   formData.append("public_id", public_id);
   formData.append("folder", folder);
@@ -60,7 +62,7 @@ export async function uploadImage({
     throw new Error("Image with that name already exists");
   }
 
-  return result.secure_url;
+  return result;
 }
 
 function generateSignature(
