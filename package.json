@@ -16,12 +16,12 @@
       "default": "./dist/components/Carousel/Carousel.js"
     },
     "./Sdk/Cloudinary/getImages": {
-      "types": "./dist/sdk/cloudinary/getCloudinaryImages.d.ts",
-      "default": "./dist/sdk/cloudinary/getCloudinaryImages.js"
+      "types": "./dist/sdk/cloudinary/getImages.d.ts",
+      "default": "./dist/sdk/cloudinary/getImages.js"
     },
     "./Sdk/Cloudinary/uploadImage": {
-      "types": "./dist/sdk/cloudinary/uploadImageToCloudinary.d.ts",
-      "default": "./dist/sdk/cloudinary/uploadImageToCloudinary.js"
+      "types": "./dist/sdk/cloudinary/uploadImage.d.ts",
+      "default": "./dist/sdk/cloudinary/uploadImage.js"
     }
   },
   "files": [

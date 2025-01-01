@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-export async function uploadImageToCloudinary({
+export default async function uploadImage({
   imageFile,
   cloudinary_key,
   cloudinary_secret,
