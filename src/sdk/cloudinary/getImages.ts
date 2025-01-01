@@ -1,10 +1,14 @@
 import { CloudinaryResource } from "../..";
 
-export async function getCloudinaryImages(
-  cloudinary_cloud_name: string,
-  cloudinary_key: string,
-  cloudinary_secret: string,
-): Promise<CloudinaryResource[]> {
+export async function getImages({
+  cloudinary_cloud_name,
+  cloudinary_key,
+  cloudinary_secret,
+}: {
+  cloudinary_cloud_name: string;
+  cloudinary_key: string;
+  cloudinary_secret: string;
+}): Promise<CloudinaryResource[]> {
   if (!cloudinary_key || !cloudinary_secret || !cloudinary_cloud_name) {
     throw new Error("Cloudinary credentials not set");
   }

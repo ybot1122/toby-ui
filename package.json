@@ -1,6 +1,6 @@
 {
   "name": "@ybot1122/toby-ui",
-  "version": "0.0.10-alpha.2",
+  "version": "0.0.11-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
     "./FAQItem": {
@@ -15,9 +15,13 @@
       "types": "./dist/components/Carousel/Carousel.d.ts",
       "default": "./dist/components/Carousel/Carousel.js"
     },
-    "./Sdk/Cloudinary/getCloudinaryImages": {
-      "types": "./dist/sdk/cloudinary/getCloudinaryImages.d.ts",
-      "default": "./dist/sdk/cloudinary/getCloudinaryImages.js"
+    "./Sdk/Cloudinary/getImages": {
+      "types": "./dist/sdk/cloudinary/getImages.d.ts",
+      "default": "./dist/sdk/cloudinary/getImages.js"
+    },
+    "./Sdk/Cloudinary/uploadImage": {
+      "types": "./dist/sdk/cloudinary/uploadImage.d.ts",
+      "default": "./dist/sdk/cloudinary/uploadImage.js"
     }
   },
   "files": [
