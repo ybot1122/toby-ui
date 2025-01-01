@@ -19,7 +19,6 @@ export const Carousel: TobyUITypes.Carousel = ({
   const [startIndex, setStartIndex] = useState(0);
   const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  console.log(containerRef);
   const transformRef = useRef(0);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
