@@ -1,6 +1,10 @@
-"use client";
-
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as TobyUITypes from "../..";
 
 export const Carousel: TobyUITypes.Carousel = ({
@@ -46,24 +50,27 @@ export const Carousel: TobyUITypes.Carousel = ({
   transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   useEffect(() => {
-    const breakpoints = [];
-    for (const rp of responsiveProp) {
-      breakpoints.push(rp.breakpoint);
-    }
-    breakpoints.push(0);
-    console.log(breakpoints.sort());
-    console.log(breakpoints);
-
-    // TODO: Figure out responsive
+    const sortedResponsive = responsiveProp.sort(
+      (a, b) => a.breakpoint - b.breakpoint,
+    );
+    setResponsive(sortedResponsive);
   }, [responsiveProp, setResponsive]);
 
   // handle resize
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
-      //const bodyWidth = document.body.clientWidth;
       setWidth(containerWidth);
-      // TODO: figure out responsive
+
+      const responsiveMatch = responsive.find(
+        (r) => containerWidth < r.breakpoint,
+      );
+
+      if (responsiveMatch) {
+        setSlidesToShow(responsiveMatch.slidesToShow);
+      } else {
+        setSlidesToShow(slidesToShowProp);
+      }
     });
 
     if (containerRef?.current) {
@@ -140,18 +147,20 @@ export const Carousel: TobyUITypes.Carousel = ({
     };
   }, [pointerDownCb, pointerUpCb, pointerMoveCb]);
 
-  // TODO: useMemo?
-  const dots = [];
-  for (let i = 0; i < children.length - slidesToShow + 1; i++) {
-    dots.push(
-      <li
-        key={i}
-        className={`w-[20px] h-[20px] px-5 mt-5 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
-      >
-        <button onClick={goToSlide(i)}>•</button>
-      </li>,
-    );
-  }
+  const dots = useMemo(() => {
+    const dotsArray = [];
+    for (let i = 0; i < children.length - slidesToShow + 1; i++) {
+      dotsArray.push(
+        <li
+          key={i}
+          className={`w-[20px] h-[20px] px-5 mt-5 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
+        >
+          <button onClick={goToSlide(i)}>•</button>
+        </li>,
+      );
+    }
+    return dotsArray;
+  }, [children.length, slidesToShow, startIndex, goToSlide]);
 
   return (
     <>

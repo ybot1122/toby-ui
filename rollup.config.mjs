@@ -9,6 +9,7 @@ const config = {
     "src/components/HelloWorld/HelloWorld.tsx",
     "src/components/NavBar/NavBar.tsx",
     "src/components/Carousel/Carousel.tsx",
+    "src/sdk/cloudinary/getCloudinaryImages.ts",
     "src/index.ts",
   ],
   output: {

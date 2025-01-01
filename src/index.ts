@@ -52,3 +52,12 @@ export type Carousel = ({
   nextButton: (onClick: () => void) => React.ReactNode;
   responsive?: { breakpoint: number; slidesToShow: number }[];
 }) => JSX.Element;
+export interface CloudinaryResource {
+  asset_id: string;
+  public_id: string;
+  resource_type: string;
+  format: string;
+  folder: string;
+  url: string;
+  secure_url: string;
+}

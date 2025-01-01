@@ -37,7 +37,7 @@ export const NavBar: TobyUITypes.NavBar = ({ children, logo, iconFill }) => {
     >
       <div className="shrink-0">{logo}</div>
 
-      <div className="ml-auto md:hidden z-50">
+      <div className="ml-auto md:hidden z-50 mt-[10px]">
         <button onClick={toggleMenu}>
           <HamburgerIcon isOpen={isOpen} fill={iconFill} />
         </button>
