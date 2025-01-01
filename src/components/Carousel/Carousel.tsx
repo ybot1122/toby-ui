@@ -26,7 +26,10 @@ export const Carousel: TobyUITypes.Carousel = ({
   responsive: responsiveProp = [],
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(
-    getResponsiveMatch(responsiveProp, window.innerWidth) || slidesToShowProp,
+    getResponsiveMatch(
+      responsiveProp,
+      window?.innerWidth || document?.body?.clientWidth || 0,
+    ) || slidesToShowProp,
   );
   const [startIndex, setStartIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
