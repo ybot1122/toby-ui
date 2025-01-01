@@ -18,7 +18,6 @@ export const Carousel: TobyUITypes.Carousel = ({
   const [startIndex, setStartIndex] = useState(0);
   const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const transformRef = useRef(0);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
   const [xOffset, setXOffset] = useState(0);
@@ -43,11 +42,6 @@ export const Carousel: TobyUITypes.Carousel = ({
       setStartIndex(startIndex - 1);
     }
   }, [startIndex, setStartIndex]);
-
-  const itemWidth = Math.ceil(
-    containerRef.current?.getBoundingClientRect().width / slidesToShow,
-  );
-  transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   useEffect(() => {
     const sortedResponsive = responsiveProp.sort(
@@ -98,16 +92,21 @@ export const Carousel: TobyUITypes.Carousel = ({
   const pointerUpCb = useCallback(() => {
     if (!pointerStartData.current) return;
 
-    const nextIndex = Math.min(
+    const itemWidth = containerRef.current?.clientWidth / slidesToShow;
+
+    const offset = xOffsetRef.current;
+    const newIndex = startIndex - Math.round(offset / itemWidth);
+
+    const clampedIndex = Math.min(
       children.length - slidesToShow,
-      Math.max(0, Math.round(transformRef.current / itemWidth) * -1),
+      Math.max(0, newIndex),
     );
 
     pointerStartData.current = undefined;
     xOffsetRef.current = 0;
     setXOffset(0);
-    setStartIndex(nextIndex);
-  }, [setXOffset, itemWidth, setStartIndex]);
+    setStartIndex(clampedIndex);
+  }, [setXOffset, setStartIndex, slidesToShow, startIndex]);
 
   const pointerMoveCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {
@@ -165,10 +164,9 @@ export const Carousel: TobyUITypes.Carousel = ({
         {prevButton(goPrev)}
         <div className="overflow-hidden w-full" ref={containerRef}>
           <ul
-            className={`${xOffset !== 0 ? "" : "transition-transform"} whitespace-nowrap`}
+            className={`${xOffset !== 0 ? "" : "transition-transform"} whitespace-nowrap w-full`}
             style={{
-              width: `100%`,
-              transform: `translateX(${transformRef.current}px)`,
+              transform: `translateX(-${(100 / slidesToShow) * startIndex}%) translateX(${xOffset}px)`,
             }}
           >
             {children.map((c, ind) => (
