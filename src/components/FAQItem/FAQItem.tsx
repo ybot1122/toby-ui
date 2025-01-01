@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import * as TobyUITypes from "../..";
 
-export const AccordionItem: TobyUITypes.AccordionItem = ({
+export const FAQItem: TobyUITypes.FAQItem = ({
   question,
   children,
   questionFontColor,
@@ -45,9 +45,7 @@ export const AccordionItem: TobyUITypes.AccordionItem = ({
   );
 };
 
-export const AccordionItemList: TobyUITypes.AccordionItemList = ({
-  children,
-}) => {
+export const FAQItemList: TobyUITypes.FAQItemList = ({ children }) => {
   return <ul className="">{children}</ul>;
 };
 
