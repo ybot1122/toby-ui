@@ -22,6 +22,10 @@
     "./Sdk/Cloudinary/uploadImage": {
       "types": "./dist/sdk/cloudinary/uploadImage.d.ts",
       "default": "./dist/sdk/cloudinary/uploadImage.js"
+    },
+    "./Sdk/GitHub/getUser": {
+      "types": "./dist/sdk/github/getUser.d.ts",
+      "default": "./dist/sdk/github/getUser.js"
     }
   },
   "files": [
