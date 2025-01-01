@@ -50,24 +50,27 @@ export const Carousel: TobyUITypes.Carousel = ({
   transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   useEffect(() => {
-    const breakpoints = [];
-    for (const rp of responsiveProp) {
-      breakpoints.push(rp.breakpoint);
-    }
-    breakpoints.push(0);
-    console.log(breakpoints.sort());
-    console.log(breakpoints);
-
-    // TODO: Figure out responsive
+    const sortedResponsive = responsiveProp.sort(
+      (a, b) => a.breakpoint - b.breakpoint,
+    );
+    setResponsive(sortedResponsive);
   }, [responsiveProp, setResponsive]);
 
   // handle resize
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
-      //const bodyWidth = document.body.clientWidth;
       setWidth(containerWidth);
-      // TODO: figure out responsive
+
+      const responsiveMatch = responsive.find(
+        (r) => containerWidth < r.breakpoint,
+      );
+
+      if (responsiveMatch) {
+        setSlidesToShow(responsiveMatch.slidesToShow);
+      } else {
+        setSlidesToShow(slidesToShowProp);
+      }
     });
 
     if (containerRef?.current) {

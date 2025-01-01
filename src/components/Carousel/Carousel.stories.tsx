@@ -46,15 +46,15 @@ export const Story: Story = {
     nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
     responsive: [
       {
-        breakpoint: 1620,
+        breakpoint: 1280,
         slidesToShow: 3,
       },
       {
-        breakpoint: 1240,
+        breakpoint: 640,
         slidesToShow: 2,
       },
       {
-        breakpoint: 760,
+        breakpoint: 320,
         slidesToShow: 1,
       },
     ],
