@@ -19,6 +19,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   const [startIndex, setStartIndex] = useState(0);
   const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  console.log(containerRef);
   const transformRef = useRef(0);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
@@ -174,15 +175,16 @@ export const Carousel: TobyUITypes.Carousel = ({
               transform: `translateX(${transformRef.current}px)`,
             }}
           >
-            {children.map((c, ind) => (
-              <li
-                className="inline-block"
-                style={{ width: `${itemWidth}px` }}
-                key={ind}
-              >
-                {c}
-              </li>
-            ))}
+            {width &&
+              children.map((c, ind) => (
+                <li
+                  className="inline-block"
+                  style={{ width: `${itemWidth}px` }}
+                  key={ind}
+                >
+                  {c}
+                </li>
+              ))}
           </ul>
         </div>
         {nextButton(goNext)}
