@@ -7,6 +7,17 @@ import React, {
 } from "react";
 import * as TobyUITypes from "../..";
 
+function getResponsiveMatch(
+  responsive: { breakpoint: number; slidesToShow: number }[],
+  width: number,
+) {
+  const sortedResponsive = responsive.sort(
+    (a, b) => a.breakpoint - b.breakpoint,
+  );
+  const result = sortedResponsive.find((r) => r.breakpoint >= width);
+  return result?.slidesToShow;
+}
+
 export const Carousel: TobyUITypes.Carousel = ({
   slidesToShow: slidesToShowProp,
   children,
@@ -14,9 +25,10 @@ export const Carousel: TobyUITypes.Carousel = ({
   nextButton,
   responsive: responsiveProp = [],
 }) => {
-  const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
+  const [slidesToShow, setSlidesToShow] = useState(
+    getResponsiveMatch(responsiveProp, window.innerWidth) || slidesToShowProp,
+  );
   const [startIndex, setStartIndex] = useState(0);
-  const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
   // xOffset ref and state should always be set together.
   const xOffsetRef = useRef(0);
@@ -43,24 +55,18 @@ export const Carousel: TobyUITypes.Carousel = ({
     }
   }, [startIndex, setStartIndex]);
 
-  useEffect(() => {
-    const sortedResponsive = responsiveProp.sort(
-      (a, b) => a.breakpoint - b.breakpoint,
-    );
-    setResponsive(sortedResponsive);
-  }, [responsiveProp, setResponsive]);
-
   // handle resize
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
 
-      const responsiveMatch = responsive.find(
-        (r) => containerWidth < r.breakpoint,
+      const responsiveMatch = getResponsiveMatch(
+        responsiveProp,
+        containerWidth,
       );
 
       if (responsiveMatch) {
-        setSlidesToShow(responsiveMatch.slidesToShow);
+        setSlidesToShow(responsiveMatch);
       } else {
         setSlidesToShow(slidesToShowProp);
       }
@@ -69,7 +75,7 @@ export const Carousel: TobyUITypes.Carousel = ({
     resizeObserver.observe(document.body);
 
     return () => resizeObserver.disconnect();
-  }, [responsive, setSlidesToShow]);
+  }, [setSlidesToShow]);
 
   // handle touch
   const pointerDownCb = useCallback(
@@ -158,6 +164,8 @@ export const Carousel: TobyUITypes.Carousel = ({
     return dotsArray;
   }, [children.length, slidesToShow, startIndex, goToSlide]);
 
+  const itemWidth = 100 / slidesToShow;
+
   return (
     <>
       <div className="flex w-full">
@@ -166,13 +174,13 @@ export const Carousel: TobyUITypes.Carousel = ({
           <ul
             className={`${xOffset !== 0 ? "" : "transition-transform"} whitespace-nowrap w-full`}
             style={{
-              transform: `translateX(-${(100 / slidesToShow) * startIndex}%) translateX(${xOffset}px)`,
+              transform: `translateX(-${itemWidth * startIndex}%) translateX(${xOffset}px)`,
             }}
           >
             {children.map((c, ind) => (
               <li
                 className="inline-block whitespace-normal"
-                style={{ width: `${100 / slidesToShow}%` }}
+                style={{ width: `${itemWidth}%` }}
                 key={ind}
               >
                 {c}
