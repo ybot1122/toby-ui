@@ -1,17 +1,19 @@
 import crypto from "crypto";
 
-export default async function uploadImage({
+export async function uploadImage({
   imageFile,
   cloudinary_key,
   cloudinary_secret,
   cloudinary_cloud_name,
   public_id,
+  folder,
 }: {
   imageFile: File;
   cloudinary_key: string;
   cloudinary_secret: string;
   cloudinary_cloud_name: string;
   public_id: string;
+  folder: string;
 }): Promise<string> {
   if (!cloudinary_key || !cloudinary_secret) {
     throw new Error("Cloudinary credentials not set");
@@ -26,7 +28,6 @@ export default async function uploadImage({
   const formData = new FormData();
   const timestamp = Date.now().toString();
   const upload_preset = "u4kwvaih";
-  const folder = "just-be-still-design";
   formData.append("file", imageFile);
   formData.append("public_id", public_id);
   formData.append("folder", folder);

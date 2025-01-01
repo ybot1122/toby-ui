@@ -1,6 +1,6 @@
 import { CloudinaryResource } from "../..";
 
-export default async function getImages({
+export async function getImages({
   cloudinary_cloud_name,
   cloudinary_key,
   cloudinary_secret,
