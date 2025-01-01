@@ -10,6 +10,7 @@ const config = {
     "src/components/NavBar/NavBar.tsx",
     "src/components/Carousel/Carousel.tsx",
     "src/sdk/cloudinary/getCloudinaryImages.ts",
+    "src/sdk/cloudinary/uploadImageToCloudinary.ts",
     "src/index.ts",
   ],
   output: {
