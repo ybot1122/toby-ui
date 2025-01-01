@@ -15,7 +15,6 @@ export const Carousel: TobyUITypes.Carousel = ({
   responsive: responsiveProp = [],
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
-  const [width, setWidth] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const [responsive, setResponsive] = useState([]);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -45,7 +44,9 @@ export const Carousel: TobyUITypes.Carousel = ({
     }
   }, [startIndex, setStartIndex]);
 
-  const itemWidth = Math.ceil(width / slidesToShow);
+  const itemWidth = Math.ceil(
+    containerRef.current?.getBoundingClientRect().width / slidesToShow,
+  );
   transformRef.current = -1 * itemWidth * startIndex + xOffset;
 
   useEffect(() => {
@@ -59,7 +60,6 @@ export const Carousel: TobyUITypes.Carousel = ({
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const containerWidth = entries[0].contentRect.width;
-      setWidth(containerWidth);
 
       const responsiveMatch = responsive.find(
         (r) => containerWidth < r.breakpoint,
@@ -72,12 +72,10 @@ export const Carousel: TobyUITypes.Carousel = ({
       }
     });
 
-    if (containerRef?.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+    resizeObserver.observe(document.body);
 
     return () => resizeObserver.disconnect();
-  }, [setWidth, responsive, setSlidesToShow]);
+  }, [responsive, setSlidesToShow]);
 
   // handle touch
   const pointerDownCb = useCallback(
