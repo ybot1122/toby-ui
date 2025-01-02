@@ -25,6 +25,7 @@ export async function putRepositoryContent({
   if (sha) {
     payload["sha"] = sha;
   }
+
   const response = await fetch(
     `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
     {
@@ -37,8 +38,6 @@ export async function putRepositoryContent({
       body: JSON.stringify(payload),
     },
   );
-
-  console.log(response.status);
 
   if (response.status === 422) {
     throw new Error("SHA is required to update a file that already exists.");
