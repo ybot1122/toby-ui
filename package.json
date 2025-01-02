@@ -30,6 +30,10 @@
     "./Sdk/GitHub/getRepositoryContent": {
       "types": "./dist/sdk/github/getRepositoryContent.d.ts",
       "default": "./dist/sdk/github/getRepositoryContent.js"
+    },
+    "./Sdk/GitHub/putRepositoryContent": {
+      "types": "./dist/sdk/github/putRepositoryContent.d.ts",
+      "default": "./dist/sdk/github/putRepositoryContent.js"
     }
   },
   "files": [

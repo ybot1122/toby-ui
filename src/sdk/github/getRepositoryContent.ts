@@ -35,6 +35,8 @@ export async function getRepositoryContent({
       `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
       {
         headers: {
+          Accept: "application/vnd.github.v3+json",
+          "X-GitHub-Api-Version": "2022-11-28",
           Authorization: `token ${token}`,
         },
       },
