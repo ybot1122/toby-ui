@@ -17,45 +17,40 @@ export async function putRepositoryContent({
   path: string;
   sha?: string;
 }): Promise<GitHubPutContentResponse> {
-  try {
-    const payload: { message: string; content: string; sha?: string } = {
-      message: commitMessage,
-      content: content,
-    };
+  const payload: { message: string; content: string; sha?: string } = {
+    message: commitMessage,
+    content: content,
+  };
 
-    if (sha) {
-      payload["sha"] = sha;
-    }
-    const response = await fetch(
-      `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
-      {
-        method: "PUT",
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-          Authorization: `token ${token}`,
-        },
-        body: JSON.stringify(payload),
-      },
-    );
-
-    console.log(response.status);
-
-    if (response.status === 422) {
-      throw new Error("SHA is required to update a file that already exists.");
-    }
-
-    if (!response.ok) {
-      throw new Error(`${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    throw error;
+  if (sha) {
+    payload["sha"] = sha;
   }
+  const response = await fetch(
+    `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        Authorization: `token ${token}`,
+      },
+      body: JSON.stringify(payload),
+    },
+  );
+
+  console.log(response.status);
+
+  if (response.status === 422) {
+    throw new Error("SHA is required to update a file that already exists.");
+  }
+
+  if (!response.ok) {
+    throw new Error(`${response.statusText}`);
+  }
+
+  const data = await response.json();
+
+  return data;
 }
 interface GitHubPutContentResponse {
   content: Content;
