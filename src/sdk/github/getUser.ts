@@ -57,7 +57,7 @@ export async function getUser({
 
     return data;
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error(error.message);
     throw error;
   }
 }

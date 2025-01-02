@@ -39,6 +39,8 @@ export async function putRepositoryContent({
       },
     );
 
+    console.log(response.status);
+
     if (response.status === 422) {
       throw new Error("SHA is required to update a file that already exists.");
     }
@@ -51,7 +53,7 @@ export async function putRepositoryContent({
 
     return data;
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error.message);
     throw error;
   }
 }

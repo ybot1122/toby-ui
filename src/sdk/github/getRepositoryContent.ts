@@ -50,7 +50,7 @@ export async function getRepositoryContent({
 
     return data;
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error.message);
     throw error;
   }
 }
