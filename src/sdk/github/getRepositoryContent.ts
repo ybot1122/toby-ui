@@ -30,27 +30,22 @@ export async function getRepositoryContent({
   repo: string;
   path: string;
 }): Promise<GithubContent> {
-  try {
-    const response = await fetch(
-      `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
-      {
-        headers: {
-          Accept: "application/vnd.github.v3+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-          Authorization: `token ${token}`,
-        },
+  const response = await fetch(
+    `${GITHUB_API_URL}/repos/${owner}/${repo}/contents/${path}`,
+    {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        Authorization: `token ${token}`,
       },
-    );
+    },
+  );
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error:", error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Error: ${response.statusText}`);
   }
+
+  const data = await response.json();
+
+  return data;
 }

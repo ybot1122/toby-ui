@@ -40,24 +40,19 @@ export async function getUser({
 }: {
   token: string;
 }): Promise<GithubUser> {
-  try {
-    const response = await fetch(`${GITHUB_API_URL}/user`, {
-      headers: {
-        Accept: "application/vnd.github.v3+json",
-        "X-GitHub-Api-Version": "2022-11-28",
-        Authorization: `token ${token}`,
-      },
-    });
+  const response = await fetch(`${GITHUB_API_URL}/user`, {
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      Authorization: `token ${token}`,
+    },
+  });
 
-    if (!response.ok) {
-      throw new Error(`Error fetching user data: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Error fetching user data: ${response.statusText}`);
   }
+
+  const data = await response.json();
+
+  return data;
 }
