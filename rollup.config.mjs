@@ -11,6 +11,9 @@ const config = {
     "src/components/Carousel/Carousel.tsx",
     "src/sdk/cloudinary/getImages.ts",
     "src/sdk/cloudinary/uploadImage.ts",
+    "src/sdk/github/getUser.ts",
+    "src/sdk/github/getRepositoryContent.ts",
+    "src/sdk/github/putRepositoryContent.ts",
     "src/index.ts",
   ],
   output: {
