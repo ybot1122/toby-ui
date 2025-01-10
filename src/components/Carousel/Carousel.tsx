@@ -128,21 +128,21 @@ export const Carousel: TobyUITypes.Carousel = ({
 
   useEffect(() => {
     containerRef.current?.addEventListener("pointerdown", pointerDownCb);
-    containerRef.current?.addEventListener("pointerup", pointerUpCb);
-    containerRef.current?.addEventListener("pointermove", pointerMoveCb);
     containerRef.current?.addEventListener("touchstart", touchStartCb);
-    containerRef.current?.addEventListener("touchmove", pointerMoveCb);
-    containerRef.current?.addEventListener("touchend", pointerUpCb);
+    document.addEventListener("pointerup", pointerUpCb);
+    document.addEventListener("pointermove", pointerMoveCb);
+    document.addEventListener("touchmove", pointerMoveCb);
+    document.addEventListener("touchend", pointerUpCb);
 
     return () => {
       containerRef.current?.removeEventListener("pointerdown", pointerDownCb);
-      containerRef.current?.removeEventListener("pointerup", pointerUpCb);
-      containerRef.current?.removeEventListener("pointermove", pointerMoveCb);
       containerRef.current?.removeEventListener("touchstart", touchStartCb);
-      containerRef.current?.removeEventListener("touchmove", pointerMoveCb);
-      containerRef.current?.removeEventListener("touchend", pointerUpCb);
+      document.removeEventListener("pointerup", pointerUpCb);
+      document.removeEventListener("pointermove", pointerMoveCb);
+      document.removeEventListener("touchmove", pointerMoveCb);
+      document.removeEventListener("touchend", pointerUpCb);
     };
-  }, [touchStartCb, pointerUpCb, pointerMoveCb]);
+  }, [touchStartCb, pointerUpCb, pointerMoveCb, pointerDownCb]);
 
   const dots = useMemo(() => {
     if (!enableDots) return null;
