@@ -31,6 +31,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Story: Story = {
   args: {
+    enableDots: true,
     slidesToShow: 4,
     children: tiles.map((i, ind) => {
       return (

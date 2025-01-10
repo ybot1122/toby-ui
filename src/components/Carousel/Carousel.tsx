@@ -24,6 +24,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   prevButton,
   nextButton,
   responsive: responsiveProp = [],
+  enableDots = true,
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
   const [startIndex, setStartIndex] = useState(0);
@@ -148,19 +149,23 @@ export const Carousel: TobyUITypes.Carousel = ({
   }, [pointerDownCb, pointerUpCb, pointerMoveCb]);
 
   const dots = useMemo(() => {
+    if (!enableDots) return null;
+
     const dotsArray = [];
     for (let i = 0; i < children.length - slidesToShow + 1; i++) {
       dotsArray.push(
         <li
           key={i}
-          className={`w-[20px] h-[20px] px-5 mt-5 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
+          className={`w-[20px] h-[20px] px-5 my-2 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
         >
-          <button onClick={goToSlide(i)}>•</button>
+          <button type="button" onClick={goToSlide(i)}>
+            •
+          </button>
         </li>,
       );
     }
-    return dotsArray;
-  }, [children.length, slidesToShow, startIndex, goToSlide]);
+    return <ul className="flex justify-center">{dotsArray}</ul>;
+  }, [children.length, slidesToShow, startIndex, goToSlide, enableDots]);
 
   const itemWidth = 100 / slidesToShow;
 
@@ -188,7 +193,7 @@ export const Carousel: TobyUITypes.Carousel = ({
         </div>
         {nextButton(goNext)}
       </div>
-      <ul className="flex justify-center">{dots}</ul>
+      {dots}
     </>
   );
 };
