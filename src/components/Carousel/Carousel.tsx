@@ -99,8 +99,6 @@ export const Carousel: TobyUITypes.Carousel = ({
     const offset = xOffsetRef.current;
     const distance = offset / itemWidth;
 
-    console.log(Math.abs(distance) >= swipeDistance, swipeDistance, distance);
-
     if (Math.abs(distance) >= swipeDistance) {
       const diff =
         Math.abs(distance) < 1 ? Math.sign(distance) : Math.round(distance);
