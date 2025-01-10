@@ -61,3 +61,22 @@ export const Story: Story = {
     ],
   },
 };
+
+const imgs = [
+  "https://res.cloudinary.com/dryy6uo6k/image/upload/s--d3Cjnjq9--/v1736386297/its-probably-spicy/img-20250108-wa0004.jpg",
+  "https://res.cloudinary.com/dryy6uo6k/image/upload/v1734813599/its-probably-spicy/img-20241221-wa0022.jpg",
+  "https://res.cloudinary.com/dryy6uo6k/image/upload/v1733190706/its-probably-spicy/4.jpg",
+  "https://res.cloudinary.com/dryy6uo6k/image/upload/v1733190680/its-probably-spicy/3.jpg",
+];
+
+export const WithImages: Story = {
+  args: {
+    enableDots: true,
+    slidesToShow: 1,
+    children: imgs.map((i) => {
+      return <img src={i} alt={i} />;
+    }),
+    prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
+    nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
+  },
+};
