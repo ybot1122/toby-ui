@@ -94,3 +94,50 @@ export const WithImages: Story = {
     ),
   },
 };
+
+const Counter = ({ ind }: { ind: number }) => {
+  const [count, setCount] = React.useState(0);
+
+  const bg = ind % 2 === 0 ? "bg-blue-500" : "bg-green-500";
+  return (
+    <div className={"text-center py-10 " + bg}>
+      <p className="text-xl">{count}</p>
+      <button
+        onClick={() => setCount(count + 1)}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Increment
+      </button>
+    </div>
+  );
+};
+
+export const WithInteractiveTiles: Story = {
+  args: {
+    enableDots: true,
+    slidesToShow: 1,
+    children: [1, 2, 3, 4, 5].map((i) => {
+      return (
+        <div>
+          <Counter ind={i} />
+        </div>
+      );
+    }),
+    prevButton: (onClick) => (
+      <button
+        onClick={onClick}
+        className="translate-x-12 z-10 h-[35px] border-blue-100 border"
+      >
+        PREV
+      </button>
+    ),
+    nextButton: (onClick) => (
+      <button
+        onClick={onClick}
+        className="-translate-x-12 h-[35px] border-blue-100 border"
+      >
+        NEXT
+      </button>
+    ),
+  },
+};

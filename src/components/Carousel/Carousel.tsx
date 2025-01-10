@@ -77,22 +77,18 @@ export const Carousel: TobyUITypes.Carousel = ({
   }, [setSlidesToShow]);
 
   // handle touch
-  const pointerDownCb = useCallback(
-    (event: PointerEvent | TouchEvent | MouseEvent) => {
-      let x = 0;
+  const touchStartCb = useCallback((event: TouchEvent) => {
+    pointerStartData.current = {
+      x: event.changedTouches["0"].clientX,
+    };
+  }, []);
 
-      if (isPointerEvent(event) || isMouseEvent(event)) {
-        x = event.clientX;
-      } else {
-        x = event.changedTouches["0"].clientX;
-      }
-
-      pointerStartData.current = {
-        x,
-      };
-    },
-    [],
-  );
+  const pointerDownCb = useCallback((event: PointerEvent) => {
+    event.preventDefault();
+    pointerStartData.current = {
+      x: event.clientX,
+    };
+  }, []);
 
   const pointerUpCb = useCallback(() => {
     if (!pointerStartData.current) return;
@@ -134,7 +130,7 @@ export const Carousel: TobyUITypes.Carousel = ({
     containerRef.current?.addEventListener("pointerdown", pointerDownCb);
     containerRef.current?.addEventListener("pointerup", pointerUpCb);
     containerRef.current?.addEventListener("pointermove", pointerMoveCb);
-    containerRef.current?.addEventListener("touchstart", pointerDownCb);
+    containerRef.current?.addEventListener("touchstart", touchStartCb);
     containerRef.current?.addEventListener("touchmove", pointerMoveCb);
     containerRef.current?.addEventListener("touchend", pointerUpCb);
 
@@ -142,11 +138,11 @@ export const Carousel: TobyUITypes.Carousel = ({
       containerRef.current?.removeEventListener("pointerdown", pointerDownCb);
       containerRef.current?.removeEventListener("pointerup", pointerUpCb);
       containerRef.current?.removeEventListener("pointermove", pointerMoveCb);
-      containerRef.current?.removeEventListener("touchstart", pointerDownCb);
+      containerRef.current?.removeEventListener("touchstart", touchStartCb);
       containerRef.current?.removeEventListener("touchmove", pointerMoveCb);
       containerRef.current?.removeEventListener("touchend", pointerUpCb);
     };
-  }, [pointerDownCb, pointerUpCb, pointerMoveCb]);
+  }, [touchStartCb, pointerUpCb, pointerMoveCb]);
 
   const dots = useMemo(() => {
     if (!enableDots) return null;
