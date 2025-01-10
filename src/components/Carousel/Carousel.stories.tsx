@@ -76,7 +76,21 @@ export const WithImages: Story = {
     children: imgs.map((i) => {
       return <img src={i} alt={i} />;
     }),
-    prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
-    nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
+    prevButton: (onClick) => (
+      <button
+        onClick={onClick}
+        className="translate-x-12 z-10 h-[35px] border-blue-100 border"
+      >
+        PREV
+      </button>
+    ),
+    nextButton: (onClick) => (
+      <button
+        onClick={onClick}
+        className="-translate-x-12 h-[35px] border-blue-100 border"
+      >
+        NEXT
+      </button>
+    ),
   },
 };

@@ -171,7 +171,7 @@ export const Carousel: TobyUITypes.Carousel = ({
 
   return (
     <>
-      <div className="flex w-full">
+      <div className="flex w-full items-center flex-row">
         {prevButton(goPrev)}
         <div className="overflow-hidden w-full" ref={containerRef}>
           <ul
