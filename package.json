@@ -34,6 +34,10 @@
     "./Sdk/GitHub/putRepositoryContent": {
       "types": "./dist/sdk/github/putRepositoryContent.d.ts",
       "default": "./dist/sdk/github/putRepositoryContent.js"
+    },
+    "./Sdk/Vercel/listDeployments": {
+      "types": "./dist/sdk/vercel/listDeployments.d.ts",
+      "default": "./dist/sdk/vercel/listDeployments.js"
     }
   },
   "files": [
@@ -44,6 +48,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
+    "run": "ts-node test.ts",
     "lint": "npx eslint . --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install",
@@ -95,6 +100,7 @@
     "rollup": "^4.24.0",
     "storybook": "^8.4.3",
     "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
     "tslib": "^2.8.0",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.10.0"
