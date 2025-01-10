@@ -22,7 +22,12 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  args: {},
+  args: {
+    swipeDistance: 0.25,
+    enableDots: true,
+    prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
+    nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
+  },
   argTypes: {},
 } satisfies Meta<typeof Carousel>;
 
@@ -31,7 +36,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Story: Story = {
   args: {
-    enableDots: true,
     slidesToShow: 4,
     children: tiles.map((i, ind) => {
       return (
@@ -43,8 +47,6 @@ export const Story: Story = {
         </div>
       );
     }),
-    prevButton: (onClick) => <button onClick={onClick}>PREV</button>,
-    nextButton: (onClick) => <button onClick={onClick}>NEXT</button>,
     responsive: [
       {
         breakpoint: 1280,
@@ -71,11 +73,12 @@ const imgs = [
 
 export const WithImages: Story = {
   args: {
-    enableDots: true,
     slidesToShow: 1,
+
     children: imgs.map((i) => {
       return <img src={i} alt={i} />;
     }),
+
     prevButton: (onClick) => (
       <button
         onClick={onClick}
@@ -84,6 +87,7 @@ export const WithImages: Story = {
         PREV
       </button>
     ),
+
     nextButton: (onClick) => (
       <button
         onClick={onClick}
@@ -114,8 +118,8 @@ const Counter = ({ ind }: { ind: number }) => {
 
 export const WithInteractiveTiles: Story = {
   args: {
-    enableDots: true,
     slidesToShow: 1,
+    swipeDistance: 0.5,
     children: [1, 2, 3, 4, 5].map((i) => {
       return (
         <div>
@@ -123,21 +127,5 @@ export const WithInteractiveTiles: Story = {
         </div>
       );
     }),
-    prevButton: (onClick) => (
-      <button
-        onClick={onClick}
-        className="translate-x-12 z-10 h-[35px] border-blue-100 border"
-      >
-        PREV
-      </button>
-    ),
-    nextButton: (onClick) => (
-      <button
-        onClick={onClick}
-        className="-translate-x-12 h-[35px] border-blue-100 border"
-      >
-        NEXT
-      </button>
-    ),
   },
 };

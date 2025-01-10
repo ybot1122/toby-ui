@@ -25,6 +25,7 @@ export const Carousel: TobyUITypes.Carousel = ({
   nextButton,
   responsive: responsiveProp = [],
   enableDots = true,
+  swipeDistance = 0.25,
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
   const [startIndex, setStartIndex] = useState(0);
@@ -96,18 +97,26 @@ export const Carousel: TobyUITypes.Carousel = ({
     const itemWidth = containerRef.current?.clientWidth / slidesToShow;
 
     const offset = xOffsetRef.current;
-    const newIndex = startIndex - Math.round(offset / itemWidth);
+    const distance = offset / itemWidth;
 
-    const clampedIndex = Math.min(
-      children.length - slidesToShow,
-      Math.max(0, newIndex),
-    );
+    console.log(Math.abs(distance) >= swipeDistance, swipeDistance, distance);
+
+    if (Math.abs(distance) >= swipeDistance) {
+      const diff =
+        Math.abs(distance) < 1 ? Math.sign(distance) : Math.round(distance);
+      const newIndex = startIndex - diff;
+
+      const clampedIndex = Math.min(
+        children.length - slidesToShow,
+        Math.max(0, newIndex),
+      );
+      setStartIndex(clampedIndex);
+    }
 
     pointerStartData.current = undefined;
     xOffsetRef.current = 0;
     setXOffset(0);
-    setStartIndex(clampedIndex);
-  }, [setXOffset, setStartIndex, slidesToShow, startIndex]);
+  }, [setXOffset, setStartIndex, slidesToShow, startIndex, swipeDistance]);
 
   const pointerMoveCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {

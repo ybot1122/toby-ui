@@ -46,6 +46,7 @@ export type Carousel = ({
   nextButton,
   responsive,
   enableDots,
+  swipeDistance,
 }: {
   slidesToShow: number;
   children: React.ReactNode[];
@@ -53,6 +54,7 @@ export type Carousel = ({
   nextButton: (onClick: () => void) => React.ReactNode;
   responsive?: { breakpoint: number; slidesToShow: number }[];
   enableDots?: boolean;
+  swipeDistance?: number;
 }) => JSX.Element;
 export interface CloudinaryResource {
   asset_id: string;
