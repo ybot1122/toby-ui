@@ -3,9 +3,9 @@
   "version": "0.0.13-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
-    "./FAQItem": {
-      "types": "./dist/components/FAQItem/FAQItem.d.ts",
-      "default": "./dist/components/FAQItem/FAQItem.js"
+    "./AccordionItem": {
+      "types": "./dist/components/AccordionItem/AccordionItem.d.ts",
+      "default": "./dist/components/AccordionItem/AccordionItem.js"
     },
     "./NavBar": {
       "types": "./dist/components/NavBar/NavBar.d.ts",
