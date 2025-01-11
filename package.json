@@ -38,6 +38,10 @@
     "./Sdk/Vercel/listDeployments": {
       "types": "./dist/sdk/vercel/listDeployments.d.ts",
       "default": "./dist/sdk/vercel/listDeployments.js"
+    },
+    "./Sdk/Vercel/getDeploymentEvents": {
+      "types": "./dist/sdk/vercel/getDeploymentEvents.d.ts",
+      "default": "./dist/sdk/vercel/getDeploymentEvents.js"
     }
   },
   "files": [

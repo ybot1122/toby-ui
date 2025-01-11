@@ -91,8 +91,6 @@ export async function listDeployments({
     `${VERCEL_API_URL}app=${app}&since=${since}&limit=${limit}`,
     {
       headers: {
-        Accept: "application/vnd.github.v3+json",
-        "X-GitHub-Api-Version": "2022-11-28",
         Authorization: `Bearer ${token}`,
       },
     },

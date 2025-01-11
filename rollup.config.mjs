@@ -15,6 +15,7 @@ const config = {
     "src/sdk/github/getRepositoryContent.ts",
     "src/sdk/github/putRepositoryContent.ts",
     "src/sdk/vercel/listDeployments.ts",
+    "src/sdk/vercel/getDeploymentEvents.ts",
     "src/index.ts",
   ],
   output: {
