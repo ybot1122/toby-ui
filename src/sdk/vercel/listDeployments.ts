@@ -44,51 +44,28 @@ interface Response {
 }
 
 interface VercelPagination {
-  properties: Properties;
-  required: string[];
-  type: string;
-  description: string;
-}
-
-interface Properties {
-  count: Count;
-  next: Next;
-  prev: Prev;
-}
-
-interface Count {
-  type: string;
-  description: string;
-  example: number;
-}
-
-interface Next {
-  nullable: boolean;
-  type: string;
-  description: string;
-  example: number;
-}
-
-interface Prev {
-  nullable: boolean;
-  type: string;
-  description: string;
-  example: number;
+  count: number;
+  next: null | number;
+  prev: null | number;
 }
 
 export async function listDeployments({
   app,
-  since,
+  since: sinceProp,
+  until: untilProp,
   limit,
   token,
 }: {
   app: string;
-  since: number;
+  since?: number;
+  until?: number;
   limit: number;
   token: string;
 }): Promise<Response> {
+  const since = sinceProp ? `&since=${sinceProp}` : "";
+  const until = untilProp ? `&until=${untilProp}` : "";
   const response = await fetch(
-    `${VERCEL_API_URL}app=${app}&since=${since}&limit=${limit}`,
+    `${VERCEL_API_URL}app=${app}${since}${until}&limit=${limit}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

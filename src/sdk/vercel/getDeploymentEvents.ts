@@ -1,9 +1,13 @@
 const VERCEL_API_URL = "https://api.vercel.com/v3/deployments";
 
+/**
+ * Returns the response object directly, because
+ * of returning readablestream when follow = true
+ */
 export async function getDeploymentEvents({
   id,
   token,
-  follow = false,
+  follow: followProp = false,
   limit = -1,
 }: {
   id: string;
@@ -11,8 +15,9 @@ export async function getDeploymentEvents({
   follow?: boolean;
   limit?: number;
 }): Promise<Response> {
+  const follow = followProp ? "&follow=1" : "";
   const response = await fetch(
-    `${VERCEL_API_URL}/${id}/events&limit=${limit}${follow ? "?follow=1" : ""}`,
+    `${VERCEL_API_URL}/${id}/events?limit=${limit}${follow}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -20,13 +25,9 @@ export async function getDeploymentEvents({
     },
   );
 
-  console.log(response);
-
   if (!response.ok) {
-    throw new Error(`Error: ${response.statusText}`);
+    throw new Error(`Error: ${response.status}`);
   }
 
-  const data = await response.json();
-
-  return data;
+  return response;
 }
