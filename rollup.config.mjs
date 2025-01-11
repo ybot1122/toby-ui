@@ -5,7 +5,7 @@ import typescript from "@rollup/plugin-typescript";
  */
 const config = {
   input: [
-    "src/components/FAQItem/FAQItem.tsx",
+    "src/components/AccordionItem/AccordionItem.tsx",
     "src/components/HelloWorld/HelloWorld.tsx",
     "src/components/NavBar/NavBar.tsx",
     "src/components/Carousel/Carousel.tsx",
@@ -14,6 +14,8 @@ const config = {
     "src/sdk/github/getUser.ts",
     "src/sdk/github/getRepositoryContent.ts",
     "src/sdk/github/putRepositoryContent.ts",
+    "src/sdk/vercel/listDeployments.ts",
+    "src/sdk/vercel/getDeploymentEvents.ts",
     "src/index.ts",
   ],
   output: {

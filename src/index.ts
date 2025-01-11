@@ -1,6 +1,6 @@
 type ReactChildren = JSX.Element | JSX.Element[];
 
-export type FAQItem = ({
+export type AccordionItem = ({
   question,
   children,
   questionFontColor,
@@ -16,7 +16,7 @@ export type FAQItem = ({
   fillColor: string;
   bold?: boolean;
 }) => JSX.Element;
-export type FAQItemList = ({
+export type AccordionItemList = ({
   children,
 }: {
   children: ReactChildren;
@@ -45,12 +45,16 @@ export type Carousel = ({
   prevButton,
   nextButton,
   responsive,
+  enableDots,
+  swipeDistance,
 }: {
   slidesToShow: number;
   children: React.ReactNode[];
   prevButton: (onClick: () => void) => React.ReactNode;
   nextButton: (onClick: () => void) => React.ReactNode;
   responsive?: { breakpoint: number; slidesToShow: number }[];
+  enableDots?: boolean;
+  swipeDistance?: number;
 }) => JSX.Element;
 export interface CloudinaryResource {
   asset_id: string;

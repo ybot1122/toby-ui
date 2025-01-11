@@ -24,6 +24,8 @@ export const Carousel: TobyUITypes.Carousel = ({
   prevButton,
   nextButton,
   responsive: responsiveProp = [],
+  enableDots = true,
+  swipeDistance = 0.25,
 }) => {
   const [slidesToShow, setSlidesToShow] = useState(slidesToShowProp);
   const [startIndex, setStartIndex] = useState(0);
@@ -76,22 +78,18 @@ export const Carousel: TobyUITypes.Carousel = ({
   }, [setSlidesToShow]);
 
   // handle touch
-  const pointerDownCb = useCallback(
-    (event: PointerEvent | TouchEvent | MouseEvent) => {
-      let x = 0;
+  const touchStartCb = useCallback((event: TouchEvent) => {
+    pointerStartData.current = {
+      x: event.changedTouches["0"].clientX,
+    };
+  }, []);
 
-      if (isPointerEvent(event) || isMouseEvent(event)) {
-        x = event.clientX;
-      } else {
-        x = event.changedTouches["0"].clientX;
-      }
-
-      pointerStartData.current = {
-        x,
-      };
-    },
-    [],
-  );
+  const pointerDownCb = useCallback((event: PointerEvent) => {
+    event.preventDefault();
+    pointerStartData.current = {
+      x: event.clientX,
+    };
+  }, []);
 
   const pointerUpCb = useCallback(() => {
     if (!pointerStartData.current) return;
@@ -99,18 +97,24 @@ export const Carousel: TobyUITypes.Carousel = ({
     const itemWidth = containerRef.current?.clientWidth / slidesToShow;
 
     const offset = xOffsetRef.current;
-    const newIndex = startIndex - Math.round(offset / itemWidth);
+    const distance = offset / itemWidth;
 
-    const clampedIndex = Math.min(
-      children.length - slidesToShow,
-      Math.max(0, newIndex),
-    );
+    if (Math.abs(distance) >= swipeDistance) {
+      const diff =
+        Math.abs(distance) < 1 ? Math.sign(distance) : Math.round(distance);
+      const newIndex = startIndex - diff;
+
+      const clampedIndex = Math.min(
+        children.length - slidesToShow,
+        Math.max(0, newIndex),
+      );
+      setStartIndex(clampedIndex);
+    }
 
     pointerStartData.current = undefined;
     xOffsetRef.current = 0;
     setXOffset(0);
-    setStartIndex(clampedIndex);
-  }, [setXOffset, setStartIndex, slidesToShow, startIndex]);
+  }, [setXOffset, setStartIndex, slidesToShow, startIndex, swipeDistance]);
 
   const pointerMoveCb = useCallback(
     (event: PointerEvent | TouchEvent | MouseEvent) => {
@@ -131,42 +135,46 @@ export const Carousel: TobyUITypes.Carousel = ({
 
   useEffect(() => {
     containerRef.current?.addEventListener("pointerdown", pointerDownCb);
-    containerRef.current?.addEventListener("pointerup", pointerUpCb);
-    containerRef.current?.addEventListener("pointermove", pointerMoveCb);
-    containerRef.current?.addEventListener("touchstart", pointerDownCb);
-    containerRef.current?.addEventListener("touchmove", pointerMoveCb);
-    containerRef.current?.addEventListener("touchend", pointerUpCb);
+    containerRef.current?.addEventListener("touchstart", touchStartCb);
+    document.addEventListener("pointerup", pointerUpCb);
+    document.addEventListener("pointermove", pointerMoveCb);
+    document.addEventListener("touchmove", pointerMoveCb);
+    document.addEventListener("touchend", pointerUpCb);
 
     return () => {
       containerRef.current?.removeEventListener("pointerdown", pointerDownCb);
-      containerRef.current?.removeEventListener("pointerup", pointerUpCb);
-      containerRef.current?.removeEventListener("pointermove", pointerMoveCb);
-      containerRef.current?.removeEventListener("touchstart", pointerDownCb);
-      containerRef.current?.removeEventListener("touchmove", pointerMoveCb);
-      containerRef.current?.removeEventListener("touchend", pointerUpCb);
+      containerRef.current?.removeEventListener("touchstart", touchStartCb);
+      document.removeEventListener("pointerup", pointerUpCb);
+      document.removeEventListener("pointermove", pointerMoveCb);
+      document.removeEventListener("touchmove", pointerMoveCb);
+      document.removeEventListener("touchend", pointerUpCb);
     };
-  }, [pointerDownCb, pointerUpCb, pointerMoveCb]);
+  }, [touchStartCb, pointerUpCb, pointerMoveCb, pointerDownCb]);
 
   const dots = useMemo(() => {
+    if (!enableDots) return null;
+
     const dotsArray = [];
     for (let i = 0; i < children.length - slidesToShow + 1; i++) {
       dotsArray.push(
         <li
           key={i}
-          className={`w-[20px] h-[20px] px-5 mt-5 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
+          className={`w-[20px] h-[20px] px-5 my-2 text-2xl ${startIndex === i ? "" : "opacity-50"}`}
         >
-          <button onClick={goToSlide(i)}>•</button>
+          <button type="button" onClick={goToSlide(i)}>
+            •
+          </button>
         </li>,
       );
     }
-    return dotsArray;
-  }, [children.length, slidesToShow, startIndex, goToSlide]);
+    return <ul className="flex justify-center">{dotsArray}</ul>;
+  }, [children.length, slidesToShow, startIndex, goToSlide, enableDots]);
 
   const itemWidth = 100 / slidesToShow;
 
   return (
     <>
-      <div className="flex w-full">
+      <div className="flex w-full items-center flex-row">
         {prevButton(goPrev)}
         <div className="overflow-hidden w-full" ref={containerRef}>
           <ul
@@ -188,7 +196,7 @@ export const Carousel: TobyUITypes.Carousel = ({
         </div>
         {nextButton(goNext)}
       </div>
-      <ul className="flex justify-center">{dots}</ul>
+      {dots}
     </>
   );
 };

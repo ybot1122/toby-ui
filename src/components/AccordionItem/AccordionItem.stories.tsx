@@ -2,17 +2,17 @@ import React from "react";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { FAQItem, FAQItemList } from "./FAQItem";
+import { AccordionItem, AccordionItemList } from "./AccordionItem";
 
 const meta = {
-  title: "FAQItemList",
-  component: FAQItemList,
+  title: "AccordionItemList",
+  component: AccordionItemList,
   tags: ["autodocs"],
   parameters: {
     layout: "fullscreen",
   },
   args: {},
-} satisfies Meta<typeof FAQItemList>;
+} satisfies Meta<typeof AccordionItemList>;
 
 const items = [
   {
@@ -62,7 +62,7 @@ export const Story: Story = {
   args: {
     children: [
       ...items.map((f) => (
-        <FAQItem
+        <AccordionItem
           question={f.q}
           key={f.q}
           bold={true}
@@ -75,9 +75,9 @@ export const Story: Story = {
               {ans}
             </p>
           ))}
-        </FAQItem>
+        </AccordionItem>
       )),
-      <FAQItem
+      <AccordionItem
         question="Do you have pictures?"
         questionFontColor="text-pink-500"
         fillColor="fill-blue-300"
@@ -87,7 +87,7 @@ export const Story: Story = {
           alt="logo"
           src="https://www.itsprobablyspicy.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdryy6uo6k%2Fimage%2Fupload%2Fv1709668872%2Fits-probably-spicy%2Fstewtable2.jpg&w=1080&q=75"
         />
-      </FAQItem>,
+      </AccordionItem>,
     ],
   },
 };

@@ -1,11 +1,11 @@
 {
   "name": "@ybot1122/toby-ui",
-  "version": "0.0.12-alpha",
+  "version": "0.0.13-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
-    "./FAQItem": {
-      "types": "./dist/components/FAQItem/FAQItem.d.ts",
-      "default": "./dist/components/FAQItem/FAQItem.js"
+    "./AccordionItem": {
+      "types": "./dist/components/AccordionItem/AccordionItem.d.ts",
+      "default": "./dist/components/AccordionItem/AccordionItem.js"
     },
     "./NavBar": {
       "types": "./dist/components/NavBar/NavBar.d.ts",
@@ -34,6 +34,14 @@
     "./Sdk/GitHub/putRepositoryContent": {
       "types": "./dist/sdk/github/putRepositoryContent.d.ts",
       "default": "./dist/sdk/github/putRepositoryContent.js"
+    },
+    "./Sdk/Vercel/listDeployments": {
+      "types": "./dist/sdk/vercel/listDeployments.d.ts",
+      "default": "./dist/sdk/vercel/listDeployments.js"
+    },
+    "./Sdk/Vercel/getDeploymentEvents": {
+      "types": "./dist/sdk/vercel/getDeploymentEvents.d.ts",
+      "default": "./dist/sdk/vercel/getDeploymentEvents.js"
     }
   },
   "files": [
@@ -44,6 +52,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\"",
+    "run": "ts-node --esm ./test.ts",
     "lint": "npx eslint . --fix",
     "typecheck": "tsc --noEmit",
     "prepare": "husky install",
