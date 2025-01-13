@@ -1,6 +1,6 @@
 {
   "name": "@ybot1122/toby-ui",
-  "version": "0.0.14-alpha",
+  "version": "0.0.15-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
     "./AccordionItem": {
@@ -42,6 +42,10 @@
     "./Sdk/Vercel/getDeploymentEvents": {
       "types": "./dist/sdk/vercel/getDeploymentEvents.d.ts",
       "default": "./dist/sdk/vercel/getDeploymentEvents.js"
+    },
+    "./Sdk/Vercel/getDeployment": {
+      "types": "./dist/sdk/vercel/getDeployment.d.ts",
+      "default": "./dist/sdk/vercel/getDeployment.js"
     }
   },
   "files": [
