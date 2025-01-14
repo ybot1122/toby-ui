@@ -17,6 +17,9 @@ const config = {
     "src/sdk/vercel/listDeployments.ts",
     "src/sdk/vercel/getDeploymentEvents.ts",
     "src/sdk/vercel/getDeployment.ts",
+    "src/sdk/instagram/me.ts",
+    "src/lib/encryptSymmetric.ts",
+    "src/lib/decryptSymmetric.ts",
     "src/index.ts",
   ],
   output: {

@@ -46,6 +46,18 @@
     "./Sdk/Vercel/getDeployment": {
       "types": "./dist/sdk/vercel/getDeployment.d.ts",
       "default": "./dist/sdk/vercel/getDeployment.js"
+    },
+    "./Sdk/Instagram/me": {
+      "types": "./dist/sdk/instagram/me.d.ts",
+      "default": "./dist/sdk/instagram/me.js"
+    },
+    "./Lib/encryptSymmetric": {
+      "types": "./dist/sdk/lib/encryptSymmetric.d.ts",
+      "default": "./dist/sdk/lib/encryptSymmetric.js"
+    },
+    "./Lib/decryptSymmetric": {
+      "types": "./dist/sdk/lib/decryptSymmetric.d.ts",
+      "default": "./dist/sdk/lib/decryptSymmetric.js"
     }
   },
   "files": [
