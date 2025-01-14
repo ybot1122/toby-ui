@@ -1,14 +1,14 @@
 export async function getInstagramLongLivedAccessToken({
-  ig_app_id,
-  ig_app_secret,
+  igId,
+  igSecret,
   accessToken,
 }: {
-  ig_app_id: string;
-  ig_app_secret: string;
+  igId: string;
+  igSecret: string;
   accessToken: string;
 }): Promise<string> {
   const latReq = await fetch(
-    `https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${ig_app_secret}&access_token=${accessToken}&client_id=${ig_app_id}`,
+    `https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${igSecret}&access_token=${accessToken}&client_id=${igId}`,
     {
       cache: "no-cache",
     },

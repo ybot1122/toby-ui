@@ -1,19 +1,19 @@
 export async function getInstagramAccessToken({
-  ig_app_id,
-  ig_app_secret,
-  redirect_uri,
+  igId,
+  igSecret,
+  redirectUri,
   code,
 }: {
-  ig_app_id: string;
-  ig_app_secret: string;
-  redirect_uri: string;
+  igId: string;
+  igSecret: string;
+  redirectUri: string;
   code: string;
 }): Promise<string> {
   const formData = new FormData();
-  formData.append("client_id", ig_app_id);
-  formData.append("client_secret", ig_app_secret);
+  formData.append("client_id", igId);
+  formData.append("client_secret", igSecret);
   formData.append("grant_type", "authorization_code");
-  formData.append("redirect_uri", redirect_uri);
+  formData.append("redirect_uri", redirectUri);
   formData.append("code", code);
 
   // Exchange code for access token
