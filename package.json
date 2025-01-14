@@ -51,6 +51,14 @@
       "types": "./dist/sdk/instagram/me.d.ts",
       "default": "./dist/sdk/instagram/me.js"
     },
+    "./Sdk/Instagram/accessToken": {
+      "types": "./dist/sdk/instagram/accessToken.d.ts",
+      "default": "./dist/sdk/instagram/accessToken.js"
+    },
+    "./Sdk/Instagram/longLivedAccessToken": {
+      "types": "./dist/sdk/instagram/longAccessToken.d.ts",
+      "default": "./dist/sdk/instagram/longAccessToken.js"
+    },
     "./Lib/encryptSymmetric": {
       "types": "./dist/sdk/lib/encryptSymmetric.d.ts",
       "default": "./dist/sdk/lib/encryptSymmetric.js"
