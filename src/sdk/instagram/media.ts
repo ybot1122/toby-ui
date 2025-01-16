@@ -1,46 +1,46 @@
+type Params = { accessToken: string; igId: string } & (
+  | { image: string; isCarouselItem: true }
+  | { caption: string; image: string; isCarouselItem: false }
+  | {
+      mediaType: "CAROUSEL";
+      children: string[];
+    }
+);
+
 export async function createMediaContainer({
-  image,
   accessToken,
-  caption,
   igId,
-  isCarouselItem,
-  mediaType,
-  children,
-}: {
-  image: string;
-  accessToken: string;
-  caption?: string;
-  igId: string;
-  isCarouselItem: boolean;
-  mediaType?: "CAROUSEL";
-  children?: string[];
-}): Promise<string> {
+  ...rest
+}: Params): Promise<string> {
   const body: {
-    image_url: string;
+    image_url?: string;
     access_token: string;
     caption?: string;
     isCarouselItem?: boolean;
     media_type?: "CAROUSEL";
-    children?: string[];
+    children?: string;
   } = {
-    image_url: image,
     access_token: accessToken,
   };
 
-  if (caption) {
-    body.caption = caption;
+  if ("image" in rest && rest.image) {
+    body.image_url = rest.image;
   }
 
-  if (isCarouselItem) {
+  if ("caption" in rest && rest.caption) {
+    body.caption = rest.caption;
+  }
+
+  if ("isCarouselItem" in rest && rest.isCarouselItem) {
     body.isCarouselItem = true;
   }
 
-  if (mediaType) {
-    body.media_type = mediaType;
+  if ("mediaType" in rest && rest.mediaType) {
+    body.media_type = rest.mediaType;
   }
 
-  if (children) {
-    body.children = children;
+  if ("children" in rest && rest.children) {
+    body.children = rest.children.join(",");
   }
 
   // Create Media Container
