@@ -1,11 +1,21 @@
 import crypto from "crypto";
 
-export const decryptSymmetric = (
-  key: string,
-  ciphertext: string,
-  tag: string,
-  iv: string,
-) => {
+export const decryptSymmetric = ({
+  key,
+  ciphertext,
+}: {
+  key: string;
+  ciphertext: string;
+}): string => {
+  const parts = ciphertext.split(".");
+  if (parts.length !== 3) {
+    throw new Error("Please decrypt a string that was encrypted using Toby UI");
+  }
+
+  const message = parts[0];
+  const tag = parts[1];
+  const iv = parts[2];
+
   // create a decipher object
   const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
 
@@ -13,7 +23,7 @@ export const decryptSymmetric = (
   decipher.setAuthTag(new Uint8Array(Buffer.from(tag, "base64")));
 
   // update the decipher object with the base64-encoded ciphertext
-  let plaintext = decipher.update(ciphertext, "base64", "utf8");
+  let plaintext = decipher.update(message, "base64", "utf8");
 
   // finalize the decryption process
   plaintext += decipher.final("utf8");
