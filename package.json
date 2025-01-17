@@ -1,6 +1,6 @@
 {
   "name": "@ybot1122/toby-ui",
-  "version": "0.0.16-alpha",
+  "version": "0.0.17-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
     "./AccordionItem": {
@@ -66,6 +66,14 @@
     "./Sdk/Instagram/mediaPublish": {
       "types": "./dist/sdk/instagram/mediaPublish.d.ts",
       "default": "./dist/sdk/instagram/mediaPublish.js"
+    },
+    "./Sdk/Brevo/sendTransactionalEmail": {
+      "types": "./dist/sdk/brevo/sendTransactionalEmail.d.ts",
+      "default": "./dist/sdk/brevo/sendTransactionalEmail.js"
+    },
+    "./Sdk/Brevo/createContact": {
+      "types": "./dist/sdk/brevo/createContact.d.ts",
+      "default": "./dist/sdk/brevo/createContact.js"
     },
     "./Lib/encryptSymmetric": {
       "types": "./dist/lib/encryptSymmetric.d.ts",
