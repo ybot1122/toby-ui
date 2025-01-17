@@ -17,6 +17,13 @@ const config = {
     "src/sdk/vercel/listDeployments.ts",
     "src/sdk/vercel/getDeploymentEvents.ts",
     "src/sdk/vercel/getDeployment.ts",
+    "src/sdk/instagram/me.ts",
+    "src/sdk/instagram/accessToken.ts",
+    "src/sdk/instagram/longAccessToken.ts",
+    "src/sdk/instagram/media.ts",
+    "src/sdk/instagram/mediaPublish.ts",
+    "src/lib/encryptSymmetric.ts",
+    "src/lib/decryptSymmetric.ts",
     "src/index.ts",
   ],
   output: {
