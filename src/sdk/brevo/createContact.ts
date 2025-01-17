@@ -5,11 +5,13 @@ export const createContact = async ({
   email,
   listIds,
   attributes,
+  brevoApiKey,
 }: {
   updateEnabled: boolean;
   email: string;
   listIds: number[];
   attributes: Record<string, string>;
+  brevoApiKey: string;
 }): Promise<"created" | "updated" | "failed"> => {
   const data = {
     updateEnabled,
@@ -23,6 +25,7 @@ export const createContact = async ({
     headers: {
       accept: "application/json",
       "content-type": "application/json",
+      "api-key": brevoApiKey,
     },
     body: JSON.stringify(data),
   });
