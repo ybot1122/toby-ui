@@ -67,6 +67,14 @@
       "types": "./dist/sdk/instagram/mediaPublish.d.ts",
       "default": "./dist/sdk/instagram/mediaPublish.js"
     },
+    "./Sdk/Brevo/sendTransactionalEmail": {
+      "types": "./dist/sdk/brevo/sendTransactionalEmail.d.ts",
+      "default": "./dist/sdk/brevo/sendTransactionalEmail.js"
+    },
+    "./Sdk/Brevo/createContact": {
+      "types": "./dist/sdk/brevo/createContact.d.ts",
+      "default": "./dist/sdk/brevo/createContact.js"
+    },
     "./Lib/encryptSymmetric": {
       "types": "./dist/lib/encryptSymmetric.d.ts",
       "default": "./dist/lib/encryptSymmetric.js"
