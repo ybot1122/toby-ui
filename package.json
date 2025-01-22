@@ -79,6 +79,14 @@
       "types": "./dist/sdk/brevo/createContact.d.ts",
       "default": "./dist/sdk/brevo/createContact.js"
     },
+    "./Sdk/x/getMe": {
+      "types": "./dist/sdk/x/getMe.d.ts",
+      "default": "./dist/sdk/x/getMe.js"
+    },
+    "./Sdk/x/postTweet": {
+      "types": "./dist/sdk/x/postTweet.d.ts",
+      "default": "./dist/sdk/x/postTweet.js"
+    },
     "./Lib/encryptSymmetric": {
       "types": "./dist/lib/encryptSymmetric.d.ts",
       "default": "./dist/lib/encryptSymmetric.js"

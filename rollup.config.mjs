@@ -25,6 +25,8 @@ const config = {
     "src/sdk/instagram/mediaPublish.ts",
     "src/sdk/brevo/sendTransactionalEmail.ts",
     "src/sdk/brevo/createContact.ts",
+    "src/sdk/x/getMe.ts",
+    "src/sdk/x/postTweet.ts",
     "src/lib/encryptSymmetric.ts",
     "src/lib/decryptSymmetric.ts",
     "src/index.ts",
