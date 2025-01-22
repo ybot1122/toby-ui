@@ -28,6 +28,7 @@ const config = {
     "src/sdk/x/getMe.ts",
     "src/sdk/x/postTweet.ts",
     "src/sdk/x/uploadMedia.ts",
+    "src/sdk/x/getAccessToken.ts",
     "src/lib/encryptSymmetric.ts",
     "src/lib/decryptSymmetric.ts",
     "src/index.ts",

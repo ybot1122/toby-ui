@@ -4,19 +4,24 @@ export async function postTweet({
   accessToken,
 }: {
   text: string;
-  media: { media_ids: string[] };
+  media?: { media_ids: string[] };
   accessToken: string;
 }) {
+  const body: { text: string; media?: { media_ids: string[] } } = {
+    text,
+  };
+
+  if (media) {
+    body["media"] = media;
+  }
+
   const postReq = await fetch("https://api.x.com/2/tweets", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "content-type": "application/json",
     },
-    body: JSON.stringify({
-      text,
-      media,
-    }),
+    body: JSON.stringify(body),
   });
 
   if (postReq.status === 429) {
