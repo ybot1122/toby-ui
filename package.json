@@ -1,6 +1,6 @@
 {
   "name": "@ybot1122/toby-ui",
-  "version": "0.0.18-alpha",
+  "version": "0.0.19-alpha",
   "description": "Collection of reusable React components.",
   "exports": {
     "./AccordionItem": {
@@ -78,6 +78,22 @@
     "./Sdk/Brevo/createContact": {
       "types": "./dist/sdk/brevo/createContact.d.ts",
       "default": "./dist/sdk/brevo/createContact.js"
+    },
+    "./Sdk/x/getMe": {
+      "types": "./dist/sdk/x/getMe.d.ts",
+      "default": "./dist/sdk/x/getMe.js"
+    },
+    "./Sdk/x/postTweet": {
+      "types": "./dist/sdk/x/postTweet.d.ts",
+      "default": "./dist/sdk/x/postTweet.js"
+    },
+    "./Sdk/x/uploadMedia": {
+      "types": "./dist/sdk/x/uploadMedia.d.ts",
+      "default": "./dist/sdk/x/uploadMedia.js"
+    },
+    "./Sdk/x/getAccessToken": {
+      "types": "./dist/sdk/x/getAccessToken.d.ts",
+      "default": "./dist/sdk/x/getAccessToken.js"
     },
     "./Lib/encryptSymmetric": {
       "types": "./dist/lib/encryptSymmetric.d.ts",
