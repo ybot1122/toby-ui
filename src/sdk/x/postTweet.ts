@@ -1,3 +1,9 @@
+type XPostResponse =
+  | {
+      data: { id: string };
+    }
+  | { errors: { message: string }[] };
+
 export async function postTweet({
   text,
   media,
@@ -6,7 +12,7 @@ export async function postTweet({
   text: string;
   media?: { media_ids: string[] };
   accessToken: string;
-}) {
+}): Promise<XPostResponse> {
   const body: { text: string; media?: { media_ids: string[] } } = {
     text,
   };
@@ -29,10 +35,6 @@ export async function postTweet({
   }
 
   const post = await postReq.json();
-
-  if (!post.data.id) {
-    throw new Error("failed to make post.");
-  }
 
   return post;
 }
