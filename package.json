@@ -35,6 +35,10 @@
       "types": "./dist/sdk/github/putRepositoryContent.d.ts",
       "default": "./dist/sdk/github/putRepositoryContent.js"
     },
+    "./Sdk/GitHub/getAccessToken": {
+      "types": "./dist/sdk/github/getAccessToken.d.ts",
+      "default": "./dist/sdk/github/getAccessToken.js"
+    },
     "./Sdk/Vercel/listDeployments": {
       "types": "./dist/sdk/vercel/listDeployments.d.ts",
       "default": "./dist/sdk/vercel/listDeployments.js"
