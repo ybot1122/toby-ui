@@ -4,7 +4,7 @@ type GithubOauthResponse =
     }
   | { error: string; error_description: string };
 
-export async function getUser({
+export async function getAccessToken({
   client_id,
   client_secret,
   code,
