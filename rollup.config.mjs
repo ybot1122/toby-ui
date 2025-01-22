@@ -27,6 +27,7 @@ const config = {
     "src/sdk/brevo/createContact.ts",
     "src/sdk/x/getMe.ts",
     "src/sdk/x/postTweet.ts",
+    "src/sdk/x/uploadMedia.ts",
     "src/lib/encryptSymmetric.ts",
     "src/lib/decryptSymmetric.ts",
     "src/index.ts",

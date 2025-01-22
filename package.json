@@ -87,6 +87,10 @@
       "types": "./dist/sdk/x/postTweet.d.ts",
       "default": "./dist/sdk/x/postTweet.js"
     },
+    "./Sdk/x/uploadMedia": {
+      "types": "./dist/sdk/x/uploadMedia.d.ts",
+      "default": "./dist/sdk/x/uploadMedia.js"
+    },
     "./Lib/encryptSymmetric": {
       "types": "./dist/lib/encryptSymmetric.d.ts",
       "default": "./dist/lib/encryptSymmetric.js"
