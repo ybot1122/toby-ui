@@ -3,10 +3,16 @@ interface EmailProps {
   senderEmail: string;
   recipientEmail: string;
   recipientName: string;
-  subject: string;
-  htmlContent: string;
+  subject?: string;
+  htmlContent?: string;
   brevoApiKey: string;
+  replyTo?: Contact;
+  cc?: [Contact];
+  templateId?: number;
+  params?: Record<string, string>;
 }
+
+interface Contact { name: string; email: string }
 
 const url = "https://api.brevo.com/v3/smtp/email";
 
@@ -18,16 +24,51 @@ export const sendTransactionalEmail = async ({
   subject,
   htmlContent,
   brevoApiKey,
+  replyTo,
+  cc,
+  templateId,
+  params,
 }: EmailProps) => {
-  const data = {
+  const data: {
+    sender: Contact;
+    to: Contact[];
+    subject?: string;
+    htmlContent?: string;
+    replyTo?: Contact;
+    cc?: Contact[];
+    templateId?: number;
+    params?: Record<string, string>;
+  } = {
     sender: {
       name: senderName,
       email: senderEmail,
     },
     to: [{ email: recipientEmail, name: recipientName }],
-    subject: subject,
-    htmlContent: htmlContent,
   };
+
+  if (subject) {
+    data.subject = subject;
+  }
+
+  if (replyTo) {
+    data.replyTo = replyTo;
+  }
+
+  if (cc) {
+    data.cc = cc;
+  }
+
+  if (htmlContent) {
+    data.htmlContent = htmlContent;
+  }
+
+  if (templateId) {
+    data.templateId = templateId;
+  }
+
+  if (params) {
+    data.params = params;
+  }
 
   const response = await fetch(url, {
     method: "POST",
@@ -38,8 +79,6 @@ export const sendTransactionalEmail = async ({
     },
     body: JSON.stringify(data),
   });
-
-  console.log(response.status);
 
   if (response.status === 201) {
     return true;
