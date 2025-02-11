@@ -2,6 +2,7 @@
   "name": "@ybot1122/toby-ui",
   "version": "0.0.20-alpha",
   "description": "Collection of reusable React components.",
+  "type": "module",
   "exports": {
     "./AccordionItem": {
       "types": "./dist/components/AccordionItem/AccordionItem.d.ts",
