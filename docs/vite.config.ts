@@ -9,8 +9,10 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  base: "/toby-ui/",
   plugins: [
     remix({
+      basename: "/toby-ui/",
       ssr: false,
       future: {
         v3_fetcherPersist: true,
