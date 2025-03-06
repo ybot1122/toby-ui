@@ -35,7 +35,7 @@ export default function Index() {
             </p>
           </a>
           <a
-            href="/examples"
+            href="/toby-ui/sdk"
             className="block p-6 border rounded-lg shadow hover:bg-gray-100 hover:text-gray-600"
           >
             <h2 className="text-2xl font-semibold">SDK</h2>
