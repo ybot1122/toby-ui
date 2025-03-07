@@ -43,6 +43,44 @@ sdk.doSomething();`}
           .
         </p>
       </section>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-2">getDeployment</h2>
+        <p>
+          The <code>getDeployment</code> function retrieves information about a
+          specific Vercel deployment.
+        </p>
+        <h3 className="text-xl font-semibold mb-2">Parameters</h3>
+        <ul className="list-disc list-inside">
+          <li>
+            <code>id</code> (string): The ID of the deployment.
+          </li>
+          <li>
+            <code>token</code> (string): The Vercel API token.
+          </li>
+        </ul>
+        <h3 className="text-xl font-semibold mb-2">Returns</h3>
+        <p>
+          A promise that resolves to a <code>VercelDeployment</code> object
+          containing the deployment details.
+        </p>
+        <h3 className="text-xl font-semibold mb-2">Example</h3>
+        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
+          <code>
+            {`import { getDeployment } from 'your-sdk-package';
+
+async function fetchDeployment() {
+  try {
+    const deployment = await getDeployment({ id: 'deployment-id', token: 'your-vercel-token' });
+    console.log(deployment);
+  } catch (error) {
+    console.error('Error fetching deployment:', error);
+  }
+}
+
+fetchDeployment();`}
+          </code>
+        </pre>
+      </section>
     </div>
   );
 };
