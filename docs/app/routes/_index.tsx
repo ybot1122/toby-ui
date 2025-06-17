@@ -17,7 +17,7 @@ export default function Index() {
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <a
-            href="/getting-started"
+            href="/toby-ui/getting-started"
             className="block p-6 border rounded-lg shadow hover:bg-gray-100 hover:text-gray-600"
           >
             <h2 className="text-2xl font-semibold">Getting Started</h2>
