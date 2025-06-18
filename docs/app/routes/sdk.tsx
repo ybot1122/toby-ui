@@ -1,4 +1,7 @@
+import { SdkSection } from "components/SdkSection";
 import React from "react";
+
+const apis = ["brevo", "cloudinary", "github", "instagram", "x", "vercel"];
 
 const SdkDocumentation: React.FC = () => {
   return (
@@ -7,79 +10,41 @@ const SdkDocumentation: React.FC = () => {
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-2">Introduction</h2>
         <p>
-          Welcome to the SDK documentation. This guide will help you understand
-          how to use our SDK effectively.
+          There are methods provided for{" "}
+          {apis.map((s) => (
+            <>
+              <a href={`#${s}`} className="underline">
+                {s.toUpperCase()}
+              </a>
+              ,{" "}
+            </>
+          ))}
         </p>
       </section>
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Installation</h2>
-        <p>To install the SDK, run the following command:</p>
-        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
-          <code>npm install your-sdk-package</code>
-        </pre>
-      </section>
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Usage</h2>
-        <p>Here is an example of how to use the SDK:</p>
-        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
-          <code>
-            {`import { YourSdk } from 'your-sdk-package';
+      <SdkSection id={apis[0]} title="Brevo">
+        <div>
+          <h2>Create Contact</h2>
+        </div>
+      </SdkSection>
 
-const sdk = new YourSdk();
-sdk.doSomething();`}
-          </code>
-        </pre>
+      <section className="mb-8" id={apis[1]}>
+        <h2>Cloudinary</h2>
       </section>
-      <section>
-        <h2 className="text-2xl font-semibold mb-2">API Reference</h2>
-        <p>
-          For detailed API reference, please visit our{" "}
-          <a
-            href="https://your-api-reference-url.com"
-            className="text-blue-500 underline"
-          >
-            API documentation
-          </a>
-          .
-        </p>
+
+      <section className="mb-8" id={apis[2]}>
+        <h2>GitHub</h2>
       </section>
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">getDeployment</h2>
-        <p>
-          The <code>getDeployment</code> function retrieves information about a
-          specific Vercel deployment.
-        </p>
-        <h3 className="text-xl font-semibold mb-2">Parameters</h3>
-        <ul className="list-disc list-inside">
-          <li>
-            <code>id</code> (string): The ID of the deployment.
-          </li>
-          <li>
-            <code>token</code> (string): The Vercel API token.
-          </li>
-        </ul>
-        <h3 className="text-xl font-semibold mb-2">Returns</h3>
-        <p>
-          A promise that resolves to a <code>VercelDeployment</code> object
-          containing the deployment details.
-        </p>
-        <h3 className="text-xl font-semibold mb-2">Example</h3>
-        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
-          <code>
-            {`import { getDeployment } from 'your-sdk-package';
 
-async function fetchDeployment() {
-  try {
-    const deployment = await getDeployment({ id: 'deployment-id', token: 'your-vercel-token' });
-    console.log(deployment);
-  } catch (error) {
-    console.error('Error fetching deployment:', error);
-  }
-}
+      <section className="mb-8" id={apis[3]}>
+        <h2>Instagram</h2>
+      </section>
 
-fetchDeployment();`}
-          </code>
-        </pre>
+      <section className="mb-8" id={apis[4]}>
+        <h2>X</h2>
+      </section>
+
+      <section className="mb-8" id={apis[5]}>
+        <h2>Vercel</h2>
       </section>
     </div>
   );
