@@ -9,7 +9,7 @@ export const SdkSection = ({
 }) => {
   return (
     <section className="mb-8" id={id}>
-      <h2>{title}</h2>
+      <h2 className="text-2xl font-bold">{title}</h2>
       <div>{children}</div>
     </section>
   );

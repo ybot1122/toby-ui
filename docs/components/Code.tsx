@@ -18,6 +18,18 @@ export const Code = ({ children }: { children: string }) => {
             </ol>
           );
         },
+        ul({ children }) {
+          return (
+            <ul
+              style={{
+                listStyleType: "disc",
+                margin: "0 0 0 50px",
+              }}
+            >
+              {children}
+            </ul>
+          );
+        },
         li({ children }) {
           return (
             <li
@@ -34,6 +46,20 @@ export const Code = ({ children }: { children: string }) => {
             <h1
               {...props}
               className="text-2xl"
+              style={{
+                borderBottom: "1px gray solid",
+                margin: "10px 0",
+                padding: "5px",
+              }}
+            >
+              {children}
+            </h1>
+          );
+        },
+        h2({ children }) {
+          return (
+            <h1
+              className="text-xl"
               style={{
                 borderBottom: "1px gray solid",
                 margin: "10px 0",
