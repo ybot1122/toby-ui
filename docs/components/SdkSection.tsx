@@ -12,12 +12,12 @@ export const SdkSection = ({
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <section className="mb-8" id={id}>
-      <h2 className="text-2xl font-bold">
-        {title}{" "}
-        <button onClick={() => setIsCollapsed((t) => !t)}>
+      <div className="flex">
+        <h2 className="text-2xl font-bold">{title}</h2>
+        <button onClick={() => setIsCollapsed((t) => !t)} className="self-end">
           {isCollapsed ? "Show More" : "Hide"}
         </button>
-      </h2>
+      </div>
       {!isCollapsed && <div>{children}</div>}
     </section>
   );

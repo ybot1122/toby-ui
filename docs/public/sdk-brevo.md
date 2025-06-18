@@ -58,6 +58,8 @@ Returns: `Promise<boolean>` true when successful, false if failure
 Example:
 
 ```ts
+import { sendTransactionalEmail } from "@ybot1122/toby-ui/Sdk/Brevo/sendTransactionalEmail";
+
 const name = "Joe Burger";
 const params = {
   name,
