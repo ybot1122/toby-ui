@@ -6,19 +6,22 @@ import React from "react";
 const apis = ["brevo", "cloudinary", "github", "instagram", "x", "vercel"];
 
 export const clientLoader = async () => {
-  const [brevoMd, cloudinaryMd] = await Promise.all([
+  const [brevoMd, cloudinaryMd, githubMd] = await Promise.all([
     fetch("/toby-ui/sdk-brevo.md"),
     fetch("/toby-ui/sdk-cloudinary.md"),
+    fetch("/toby-ui/sdk-github.md"),
   ]);
-  const [brevoRaw, cloudinaryRaw] = await Promise.all([
+  const [brevoText, cloudinaryText, githubText] = await Promise.all([
     brevoMd.text(),
     cloudinaryMd.text(),
+    githubMd.text(),
   ]);
-  return [brevoRaw, cloudinaryRaw];
+  return [brevoText, cloudinaryText, githubText];
 };
 
 const SdkDocumentation: React.FC = () => {
-  const [brevoRaw, cloudinaryRaw] = useLoaderData<typeof clientLoader>();
+  const [brevoText, cloudinaryText, githubText] =
+    useLoaderData<typeof clientLoader>();
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">SDK Documentation</h1>
@@ -37,28 +40,16 @@ const SdkDocumentation: React.FC = () => {
         </p>
       </section>
       <SdkSection id={apis[0]} title="Brevo">
-        <Code>{brevoRaw}</Code>
+        <Code>{brevoText}</Code>
       </SdkSection>
 
       <SdkSection id={apis[1]} title="Cloudinary">
-        <Code>{cloudinaryRaw}</Code>
+        <Code>{cloudinaryText}</Code>
       </SdkSection>
 
-      <section className="mb-8" id={apis[2]}>
-        <h2>GitHub</h2>
-      </section>
-
-      <section className="mb-8" id={apis[3]}>
-        <h2>Instagram</h2>
-      </section>
-
-      <section className="mb-8" id={apis[4]}>
-        <h2>X</h2>
-      </section>
-
-      <section className="mb-8" id={apis[5]}>
-        <h2>Vercel</h2>
-      </section>
+      <SdkSection id={apis[2]} title="GitHub">
+        <Code>{githubText}</Code>
+      </SdkSection>
     </div>
   );
 };
