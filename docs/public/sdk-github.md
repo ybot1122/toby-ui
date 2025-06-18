@@ -34,3 +34,66 @@ async function GET(request: Request) {
   return data.access_token;
 }
 ```
+
+## Get Repository Content
+
+Get contents from a repository.
+
+Parameters:
+
+- **token**: string - Access Token. Will be sent via Authorization HTTP Header
+- **owner**: string - Repository owner
+- **repo**: string - Repository name
+- **path** string - Path to the file
+
+Returns: `Promise<GithubContent>`
+
+```ts
+interface GithubContent {
+  type: string;
+  encoding: string;
+  size: number;
+  name: string;
+  path: string;
+  content: string;
+  sha: string;
+  url: string;
+  git_url: string;
+  html_url: string;
+  download_url: string;
+  _links: {
+    self: string;
+    git: string;
+    html: string;
+  };
+}
+```
+
+Example:
+
+```ts
+import { getRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/getRepositoryContent";
+
+try {
+  const data = await getRepositoryContent({
+    path: `content/file.json`,
+    owner: "me",
+    repo: "my_repo",
+    token: "ACCESS TOKEN",
+  });
+
+  if (data.sha) {
+    return {
+      status: "success",
+      message: data.sha,
+    };
+  }
+} catch (e: any) {
+  console.log(e);
+}
+
+return {
+  status: "fail",
+  message: "unknown fail",
+};
+```
