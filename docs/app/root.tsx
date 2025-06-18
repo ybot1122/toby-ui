@@ -47,14 +47,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </a>
         <a
           href="https://github.com/ybot1122/toby-ui"
-          className="flex flex-col items-center justify-center hover:underline"
+          className="flex flex-col items-end justify-end hover:underline"
         >
           <img
             src="/toby-ui/github.svg"
             alt="Project is on GitHub"
             width={25}
           />
-          View on GitHub
         </a>
       </nav>
       <body>

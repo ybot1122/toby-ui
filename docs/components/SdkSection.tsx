@@ -12,8 +12,10 @@ export const SdkSection = ({
   const [isCollapsed, setIsCollapsed] = useState(true);
   return (
     <section className="mb-8" id={id}>
-      <div className="flex">
-        <h2 className="text-2xl font-bold">{title}</h2>
+      <div className="flex justify-between items-start">
+        <h2 className="text-2xl font-bold" style={{ width: "200px" }}>
+          {title}
+        </h2>
         <button onClick={() => setIsCollapsed((t) => !t)} className="self-end">
           {isCollapsed ? "Show More" : "Hide"}
         </button>
