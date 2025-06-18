@@ -16,3 +16,7 @@ module.exports = {
   ],
 };
 ```
+
+# Import Component or Methods
+
+Head over to the [SDK docs](/toby-ui/sdk) or [Component docs](/toby-ui/sdk) to see what's available out of the box!

@@ -6,9 +6,40 @@ export const Code = ({ children }: { children: string }) => {
   return (
     <ReactMarkdown
       components={{
+        ol({ children }) {
+          return (
+            <ol
+              style={{
+                listStyleType: "decimal",
+                margin: "0 0 0 50px",
+              }}
+            >
+              {children}
+            </ol>
+          );
+        },
+        li({ children }) {
+          return (
+            <li
+              style={{
+                margin: "0 0 10px 0",
+              }}
+            >
+              {children}
+            </li>
+          );
+        },
         h1({ children, ...props }) {
           return (
-            <h1 {...props} className="text-2xl mb-2">
+            <h1
+              {...props}
+              className="text-2xl"
+              style={{
+                borderBottom: "1px gray solid",
+                margin: "10px 0",
+                padding: "5px",
+              }}
+            >
               {children}
             </h1>
           );
@@ -31,7 +62,7 @@ export const Code = ({ children }: { children: string }) => {
               PreTag="div"
             />
           ) : (
-            <code className={className} {...props}>
+            <code className={className + " mb-2 inline"} {...props}>
               {children}
             </code>
           );

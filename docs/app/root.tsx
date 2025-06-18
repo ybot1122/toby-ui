@@ -32,6 +32,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
+      <nav className="grid grid-cols-4 p-5">
+        <a href="/toby-ui/" className="hover:underline">
+          Home
+        </a>
+        <a href="/toby-ui/getting-started" className="hover:underline">
+          Getting Started
+        </a>
+        <a href="/toby-ui/sdk" className="hover:underline">
+          SDK Reference
+        </a>
+        <a href="/toby-ui/components" className="hover:underline">
+          Components
+        </a>
+      </nav>
       <body>
         {children}
         <ScrollRestoration />
