@@ -1,47 +1,57 @@
+import { useLoaderData } from "@remix-run/react";
+import { Code } from "components/Code";
+import { SdkSection } from "components/SdkSection";
 import React from "react";
 
+const apis = ["brevo", "cloudinary", "github", "instagram", "x", "vercel"];
+
+export const clientLoader = async () => {
+  const brevoMd = await fetch("/toby-ui/sdk-brevo.md");
+  const brevoRaw = await brevoMd.text();
+  return brevoRaw;
+};
+
 const SdkDocumentation: React.FC = () => {
+  const brevoRaw = useLoaderData<typeof clientLoader>();
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">SDK Documentation</h1>
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-2">Introduction</h2>
         <p>
-          Welcome to the SDK documentation. This guide will help you understand
-          how to use our SDK effectively.
+          There are methods provided for{" "}
+          {apis.map((s) => (
+            <>
+              <a href={`#${s}`} className="underline">
+                {s.toUpperCase()}
+              </a>
+              ,{" "}
+            </>
+          ))}
         </p>
       </section>
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Installation</h2>
-        <p>To install the SDK, run the following command:</p>
-        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
-          <code>npm install your-sdk-package</code>
-        </pre>
-      </section>
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-2">Usage</h2>
-        <p>Here is an example of how to use the SDK:</p>
-        <pre className="bg-gray-100 text-gray-600 p-4 rounded">
-          <code>
-            {`import { YourSdk } from 'your-sdk-package';
+      <SdkSection id={apis[0]} title="Brevo">
+        <Code>{brevoRaw}</Code>
+      </SdkSection>
 
-const sdk = new YourSdk();
-sdk.doSomething();`}
-          </code>
-        </pre>
+      <section className="mb-8" id={apis[1]}>
+        <h2>Cloudinary</h2>
       </section>
-      <section>
-        <h2 className="text-2xl font-semibold mb-2">API Reference</h2>
-        <p>
-          For detailed API reference, please visit our{" "}
-          <a
-            href="https://your-api-reference-url.com"
-            className="text-blue-500 underline"
-          >
-            API documentation
-          </a>
-          .
-        </p>
+
+      <section className="mb-8" id={apis[2]}>
+        <h2>GitHub</h2>
+      </section>
+
+      <section className="mb-8" id={apis[3]}>
+        <h2>Instagram</h2>
+      </section>
+
+      <section className="mb-8" id={apis[4]}>
+        <h2>X</h2>
+      </section>
+
+      <section className="mb-8" id={apis[5]}>
+        <h2>Vercel</h2>
       </section>
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-2">getDeployment</h2>
