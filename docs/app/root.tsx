@@ -32,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <nav className="grid grid-cols-4 p-5">
+      <nav className="grid grid-cols-5 p-5 items-center align-center">
         <a href="/toby-ui/" className="hover:underline">
           Home
         </a>
@@ -44,6 +44,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </a>
         <a href="/toby-ui/components" className="hover:underline">
           Components
+        </a>
+        <a
+          href="https://github.com/ybot1122/toby-ui"
+          className="flex flex-col items-center justify-center hover:underline"
+        >
+          <img
+            src="/toby-ui/github.svg"
+            alt="Project is on GitHub"
+            width={25}
+          />
+          View on GitHub
         </a>
       </nav>
       <body>
