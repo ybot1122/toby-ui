@@ -67,6 +67,13 @@ export const Code = ({ children }: { children: string }) => {
             </code>
           );
         },
+        a({ children, href }) {
+          return (
+            <a href={href} style={{ textDecoration: "underline" }}>
+              {children}
+            </a>
+          );
+        },
       }}
     >
       {children}
