@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,26 +17,26 @@ export default function Index() {
           Get started by exploring the sections below:
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <a
-            href="/toby-ui/getting-started"
+          <Link
+            to="/getting-started"
             className="block p-6 border rounded-lg shadow hover:bg-gray-100 hover:text-gray-600"
           >
             <h2 className="text-2xl font-semibold">Getting Started</h2>
             <p className="mt-2 text-gray-600">
               Learn how to set up and use TobyUI in your projects.
             </p>
-          </a>
-          <a
-            href="/components"
+          </Link>
+          <Link
+            to="/components"
             className="block p-6 border rounded-lg shadow hover:bg-gray-100 hover:text-gray-600"
           >
             <h2 className="text-2xl font-semibold">Components</h2>
             <p className="mt-2 text-gray-600">
               Explore the available components and their usage.
             </p>
-          </a>
-          <a
-            href="/toby-ui/sdk"
+          </Link>
+          <Link
+            to="/sdk"
             className="block p-6 border rounded-lg shadow hover:bg-gray-100 hover:text-gray-600"
           >
             <h2 className="text-2xl font-semibold">SDK</h2>
@@ -43,7 +44,7 @@ export default function Index() {
               Check out some the SDK which offers integration to commonly used
               APIs.
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
