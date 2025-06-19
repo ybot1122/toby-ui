@@ -35,6 +35,62 @@ async function GET(request: Request) {
 }
 ```
 
+## Get User
+
+Get information about the currently authenticated user.
+
+Parameters:
+
+- **token**: string - Access Token. Will be sent via Authorization HTTP Header
+
+Returns: `Promise<GithubUser>`
+
+```ts
+interface GithubUser {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+  name: string;
+  company: string;
+  blog: string;
+  location: string;
+  email: string;
+  hireable: boolean;
+  bio: string;
+  twitter_username: string;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+}
+```
+
+Example:
+
+```ts
+import { getUser } from "@ybot1122/toby-ui/Sdk/GitHub/getUser";
+
+const user = await getUser({token: "ACCESS TOKEN"});
+console.log(`Welcome, ${user.login}`).
+```
+
 ## Get Repository Content
 
 Get contents from a repository.
@@ -96,4 +152,51 @@ return {
   status: "fail",
   message: "unknown fail",
 };
+```
+
+## Put Repository Content
+
+Given a file path, sha, and content, update the file.
+
+Parameters:
+
+- **token**: string - Access Token. Will be sent via Authorization HTTP Header
+- **owner**: string - Repository owner
+- **repo**: string - Repository name
+- **path** string - Path to the file
+- **commitMessage**: string - commit message you want to make
+- **content**: string - base64 encoded content
+- **sha**: string (optional) - only requried if updating an existing file. Creating new file, it is not required.
+
+Returns: `Promise<GitHubPutContentResponse>`
+
+```ts
+interface GitHubPutContentResponse {
+  content: Content;
+  commit: Commit;
+}
+```
+
+Example:
+
+```ts
+import { putRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/putRepositoryContent";
+
+const content = btoa("Hello World!")
+
+const response = await putRepositoryContent({
+  content,
+  owner: "Me",
+  repo: "my-repo",
+  path: `content/post.json`,
+  commitMessage: "update the post"
+  token: accessToken,
+  sha,
+});
+
+if (response.commit.sha) {
+  console.log('success')
+} else {
+  console.log('fail';)
+}
 ```
