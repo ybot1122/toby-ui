@@ -115,7 +115,7 @@ import {
       time.
     </p>
   </AccordionItem>
-</AccordionItemList> \`\`\``}
+</AccordionItemList>`}
         />
       </div>
     </SdkSection>

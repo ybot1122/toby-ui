@@ -19,4 +19,4 @@ module.exports = {
 
 # Import Component or Methods
 
-Head over to the [SDK docs](/toby-ui/sdk) or [Component docs](/toby-ui/components) to see what's available out of the box!
+You are ready to import our React Components or SDK Methods. Head over to the other docs to see what's available out of the box.

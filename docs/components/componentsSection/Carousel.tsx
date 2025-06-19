@@ -60,57 +60,43 @@ export const CarouselSection = () => {
             </Carousel>
           }
           markdown={`\`\`\`tsx
-import {
-  AccordionItem,
-  AccordionItemList,
-} from "@ybot1122/toby-ui/AccordionItem";
-<AccordionItemList>
-  <AccordionItem
-    question="What kind of services do you provide?"
-    questionFontColor="text-blue-700"
-    borderColor="border-green-500"
-    fillColor="color-red-400"
+import { Carousel } from "@ybot1122/toby-ui/Carousel";
+
+<Carousel
+    slidesToShow={4}
+    responsive={[
+      {
+        breakpoint: 1280,
+        slidesToShow: 3,
+      },
+      {
+        breakpoint: 640,
+        slidesToShow: 2,
+      },
+      {
+        breakpoint: 320,
+        slidesToShow: 1,
+      },
+    ]}
+    prevButton={(onClick) => <button onClick={onClick}>Prev</button>}
+    nextButton={(onClick) => <button onClick={onClick}>Next</button>}
+    enableDots={true}
   >
-    <p>
-      We are a professional contracting company offering
-      high-quality construction, renovation, and maintenance
-      services. Our experienced team is committed to delivering
-      reliable solutions for residential and commercial projects,
-      ensuring customer satisfaction and exceptional results every
-      time.
-    </p>
-  </AccordionItem>
-  <AccordionItem
-    question="Where do you operate?"
-    questionFontColor="text-blue-700"
-    borderColor="border-green-500"
-    fillColor="color-red-400"
-  >
-    <p>
-      We are a professional contracting company offering
-      high-quality construction, renovation, and maintenance
-      services. Our experienced team is committed to delivering
-      reliable solutions for residential and commercial projects,
-      ensuring customer satisfaction and exceptional results every
-      time.
-    </p>
-  </AccordionItem>
-  <AccordionItem
-    question="How often do you make trips?"
-    questionFontColor="text-blue-700"
-    borderColor="border-green-500"
-    fillColor="color-red-400"
-  >
-    <p>
-      We are a professional contracting company offering
-      high-quality construction, renovation, and maintenance
-      services. Our experienced team is committed to delivering
-      reliable solutions for residential and commercial projects,
-      ensuring customer satisfaction and exceptional results every
-      time.
-    </p>
-  </AccordionItem>
-</AccordionItemList> \`\`\``}
+    {tiles.map((i, ind) => {
+      return (
+        <div
+          key={i}
+          style={{
+            height: "300px",
+            padding: "10px",
+            backgroundColor: ind % 2 === 0 ? "red" : "blue",
+          }}
+        >
+          {i}
+        </div>
+      );
+    })}
+  </Carousel>`}
         />
       </div>
     </SdkSection>

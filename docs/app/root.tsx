@@ -1,4 +1,5 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
@@ -33,18 +34,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <nav className="grid grid-cols-5 p-5 items-center align-center">
-        <a href="/toby-ui/" className="hover:underline">
+        <Link to="/" className="hover:underline">
           Home
-        </a>
-        <a href="/toby-ui/getting-started" className="hover:underline">
+        </Link>
+        <Link to="/getting-started" className="hover:underline">
           Getting Started
-        </a>
-        <a href="/toby-ui/sdk" className="hover:underline">
+        </Link>
+        <Link to="/sdk" className="hover:underline">
           SDK Reference
-        </a>
-        <a href="/toby-ui/components" className="hover:underline">
+        </Link>
+        <Link to="/components" className="hover:underline">
           Components
-        </a>
+        </Link>
         <a
           href="https://github.com/ybot1122/toby-ui"
           className="flex flex-col items-end justify-end hover:underline"
