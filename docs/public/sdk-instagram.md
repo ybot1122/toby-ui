@@ -83,3 +83,84 @@ import { getInstagramMe } from "@ybot1122/toby-ui/Sdk/Instagram/me";
 
 const igMe = await getInstagramMe({ accessToken: "123", fields: ["name"] });
 ```
+
+## Create Media Container
+
+Creates a media container for Instagram posts. Supports single images, carousel items, and carousel posts.
+
+Parameters:
+
+- **accessToken**: string - access token
+- **igId**: string - Instagram account ID
+- **image**: string - image URL (for single images and carousel items)
+- **caption**: string - post caption (for single images only)
+- **isCarouselItem**: boolean - whether this is a carousel item
+- **mediaType**: "CAROUSEL" - specify for carousel posts
+- **children**: string[] - array of media container IDs for carousel posts
+
+Returns: `Promise<string>` - media container ID
+
+Example:
+
+```ts
+import { createMediaContainer } from "@ybot1122/toby-ui/Sdk/Instagram/media";
+
+// Single image post
+const mediaContainerId = await createMediaContainer({
+  accessToken: "123",
+  igId: "456",
+  image: "https://example.com/image.jpg",
+  caption: "My awesome post!",
+  isCarouselItem: false,
+});
+
+// Carousel item
+const carouselItemId = await createMediaContainer({
+  accessToken: "123",
+  igId: "456",
+  image: "https://example.com/image1.jpg",
+  isCarouselItem: true,
+});
+
+// Carousel post
+const carouselId = await createMediaContainer({
+  accessToken: "123",
+  igId: "456",
+  mediaType: "CAROUSEL",
+  children: ["item1_id", "item2_id", "item3_id"],
+});
+```
+
+## Publish Media Container
+
+Publishes a media container to Instagram. This converts a media container into a live Instagram post.
+
+Parameters:
+
+- **mediaContainerId**: string - ID of the media container to publish
+- **igId**: string - Instagram account ID
+- **accessToken**: string - access token
+
+Returns: `Promise<string>` - published media ID
+
+Example:
+
+```ts
+import { publishMediaContainer } from "@ybot1122/toby-ui/Sdk/Instagram/mediaPublish";
+
+// First create a media container
+const mediaContainerId = await createMediaContainer({
+  accessToken: "123",
+  igId: "456",
+  image: "https://example.com/image.jpg",
+  caption: "My awesome post!",
+  isCarouselItem: false,
+});
+
+// Then publish it
+const publishedMediaId = await publishMediaContainer({
+  mediaContainerId,
+  igId: "456",
+  accessToken: "123",
+});
+```
