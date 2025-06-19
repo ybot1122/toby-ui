@@ -59,11 +59,11 @@ export const Code = ({ children }: { children: string }) => {
         h2({ children }) {
           return (
             <h1
-              className="text-xl"
               style={{
                 borderBottom: "1px gray solid",
                 margin: "10px 0",
                 padding: "5px",
+                fontSize: "1.5rem",
               }}
             >
               {children}
