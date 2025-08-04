@@ -87,7 +87,7 @@ const UploadImageForm = () => {
       cloudinary_secret: "CLOUDINARY_SECRET",
       cloudinary_cloud_name: "CLOUDINARY_CLOUD_NAME",
       imageFile,
-      public_id: "my_image_public_d",
+      public_id: "my_image_public_id",
       folder: "CLOUDINARY_FOLDER_NAME",
       upload_preset: "u4kwvaih",
     });

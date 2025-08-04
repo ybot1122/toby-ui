@@ -33,17 +33,17 @@ export async function uploadImage({
   formData.append("file", imageFile);
   formData.append("public_id", public_id);
   formData.append("folder", folder);
-  formData.append("upload_preset", "u4kwvaih");
+  formData.append("upload_preset", upload_preset);
   formData.append("timestamp", timestamp);
   formData.append(
     "signature",
-    generateSignature(
+    generateSignature({
       folder,
       public_id,
       timestamp,
       upload_preset,
       cloudinary_secret,
-    ),
+    }),
   );
   formData.append("api_key", cloudinary_key);
 
@@ -53,7 +53,8 @@ export async function uploadImage({
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to upload image: ${response.statusText}`);
+    const payload = await response.text();
+    throw new Error(`Failed to upload image: ${payload}`);
   }
 
   const result = await response.json();
@@ -65,14 +66,20 @@ export async function uploadImage({
   return result;
 }
 
-function generateSignature(
-  folder: string,
-  public_id: string,
-  timestamp: string,
-  upload_preset: string,
-  CLOUDINARY_SECRET: string,
-): string {
-  const string = `folder=${folder}&public_id=${public_id}&timestamp=${timestamp}&upload_preset=${upload_preset}${CLOUDINARY_SECRET}`;
+function generateSignature({
+  folder,
+  public_id,
+  timestamp,
+  upload_preset,
+  cloudinary_secret,
+}: {
+  folder: string;
+  public_id: string;
+  timestamp: string;
+  upload_preset: string;
+  cloudinary_secret: string;
+}): string {
+  const string = `folder=${folder}&public_id=${public_id}&timestamp=${timestamp}&upload_preset=${upload_preset}${cloudinary_secret}`;
 
   return crypto.createHash("sha1").update(string).digest("hex");
 }
